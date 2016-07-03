@@ -1,1 +1,1 @@
-# Settings for my work environments
+# Settings for my work environment
