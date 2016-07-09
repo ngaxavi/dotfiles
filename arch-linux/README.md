@@ -1,4 +1,4 @@
-## Build Your Arch Linux System 
+## Build Your Arch Linux System (No Complete)
 
 Arch Linux is a do-it-yourself Linux distro, It’s very popular among linux geeks and developers that like to really get at the nuts and bolts of a system. Arch give you the freedom to make any choice about the system. **It does not come with any pre-installed packages/drivers or graphical installer**, instead It uses a **command line installer**.
 When you boot it up for the first time, you’ll be greeted with a command-line tool. It expects you to perform the entire installation from the command-line and install all the necessary program/driver by yourself and customize it the way you want it — by piecing together the components that you’d like to include on your system. 
@@ -9,6 +9,10 @@ I'll also show you some tips, tricks and tweaks on how you can change the way th
 
 **WARNING**: There is a very **HIGH** chance you can destroy other operating systems or partition, if you don't do it right. **Please proceed with caution**. If you are new to Linux world I HIGHLY suggest you start off with a distro like Ubuntu or Mint Linux. Ubuntu is designed for people who want an off-the-shelf type system, where all of the choices are already made and the users are expected to sacrifice control for convenience.  
 
+## Set the keyboard layout
+```bash
+root@arch ~ # loadkeys de-latin1
+```
 
 ## Prepare the hard drives
 
@@ -17,53 +21,76 @@ Run this command:
 root@arch ~ # cfdisk /dev/sda
 ```
 
-- sda5 - swap **2GB**
-- sda6 - root **18GB** (bootable)
+- sda2 - swap **8GB**
+- sda1 - root **250GB** (bootable)
+- sda3 - data **230GB**  (data partition)
 
 
 
 ```bash
-root@arch ~ # mkfs.ext4  /dev/sda6
-root@arch ~ # mount /dev/sda6 /mnt
+root@arch ~ # mkfs.ext4 -L arch /dev/sda1
+root@arch ~ # mkswap -L swap /dev/sda2
+root@arch ~ # mount /dev/sda1 /mnt
+root@arch ~ # mkdir /mnt/data
+root@arch ~ # mount /dev/sda3 /mnt
+root@arch ~ # swapon -L swap
 ```
 
-```bash
-root@arch ~ # mkswap /dev/sda5
-root@arch ~ # swapon /dev/sda5
-```
 
 ## Installing System Base
 
+### System Base
+Packages to be installed must be downloaded from mirror servers, which are defined in /etc/pacman.d/mirrorlist. On the live system, all mirrors are enabled, and sorted by their synchronization status and speed at the time the installation image was created.
+The higher a mirror is placed in the list, the more priority it is given when downloading a package. You may want to edit the file accordingly, and move the geographically closest mirrors to the top of the list, although other criteria should be taken into account.
 
 ```bash
-root@arch ~ # pacstrap /mnt base base-devel
+root@arch ~ # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+root@arch ~ # grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
+```
+
+
+```bash
+root@arch ~ # pacstrap /mnt base base-devel wpa_supplicant
+```
+
+### Create fstab
+
+```bash
+root@arch ~ # genfstab -Lp /mnt > /mnt/etc/fstab
 ```
 
 ## Configuration the Installation
 
 ```bash
-root@arch ~ # arch-chroot /mnt
+root@arch ~ # arch-chroot /mnt/
 ```
 
 ```bash
-sh-4.3# ip link
-sh-4.3#  systemctl enable dhcpcd@enp3s0.service
-```
-
-```bash
+sh-4.3# echo myhost > /etc/hostname
+sh-4.3# echo LANG=de_DE.UTF-8 > /etc/locale.conf
+sh-4.3# echo LC_COLLATE=C >> /etc/locale.conf
+sh-4.3# echo LANGUAGE=de_DE >> /etc/locale.conf
+sh-4.3# echo KEYMAP=de-latin1 > /etc/vconsole.conf
+sh-4.3# ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 sh-4.3# nano /etc/locale.gen
+```
+Find out # and remove it
+
+```bash
+#de_DE.UTF-8 UTF-8
+#de_DE ISO-8859-1
+#de_DE@euro ISO-8859-15
+#en_US.UTF-8 UTF-8
+
 sh-4.3# locale-gen
-sh-4.3# echo LANG=en_US.UTF-8 > /etc/locale.conf
-sh-4.3# export LANG=en_US.UTF-8
 ```
 
 ```
-# ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
-# hwclock --systohc --localtime
+
 ```
 
 ```
-# echo USER_NAME > /etc/hostname
+# 
 ```
 
 ```bash
@@ -249,7 +276,7 @@ $ yaourt -S gnome-session-properties
 
 --
 
-###Install Docker
+### Install Docker
 ```
 $ sudo pacman -S docker
 ```
