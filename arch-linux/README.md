@@ -21,9 +21,9 @@ Run this command:
 root@arch ~ # cfdisk /dev/sda
 ```
 
-- sda2 - swap **8GB**
+- sda2 - swap **2GB**
 - sda1 - root **250GB** (bootable)
-- sda3 - data **230GB**  (data partition)
+- sda3 - data **230GB**  (data partition extended)
 
 
 
@@ -32,7 +32,7 @@ root@arch ~ # mkfs.ext4 -L arch /dev/sda1
 root@arch ~ # mkswap -L swap /dev/sda2
 root@arch ~ # mount /dev/sda1 /mnt
 root@arch ~ # mkdir /mnt/data
-root@arch ~ # mount /dev/sda3 /mnt
+root@arch ~ # mount /dev/sda3 /mnt/data
 root@arch ~ # swapon -L swap
 ```
 
@@ -71,10 +71,11 @@ sh-4.3# echo LANG=de_DE.UTF-8 > /etc/locale.conf
 sh-4.3# echo LC_COLLATE=C >> /etc/locale.conf
 sh-4.3# echo LANGUAGE=de_DE >> /etc/locale.conf
 sh-4.3# echo KEYMAP=de-latin1 > /etc/vconsole.conf
+sh-4.3# echo FONT=lat9w-16 >> /etc/vconsole.conf
 sh-4.3# ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 sh-4.3# nano /etc/locale.gen
 ```
-Find out # and remove it
+Find # and remove it
 
 ```bash
 #de_DE.UTF-8 UTF-8
@@ -84,13 +85,23 @@ Find out # and remove it
 
 sh-4.3# locale-gen
 ```
+### Pacman Configuration
+
+activate 32-bit library
 
 ```
+/etc/pacman.conf
+
+[multilib]
+SigLevel = PackageRequired TrustedOnly
+Include = /etc/pacman.d/mirrorlist
+
+pacman -Sy
+```
+### Linux Kernel
 
 ```
-
-```
-# 
+mkinitcpio -p linux
 ```
 
 ```bash
@@ -98,143 +109,160 @@ sh-4.3# passwd
 ```
 
 ```bash
-sh-4.3# pacman -S grub os-prober
+sh-4.3# pacman -S grub bash-completion
 sh-4.3# grub-install /dev/sda
-sh-4.3# mkinitcpio -p linux
 sh-4.3# grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## Exit
+## Exit and Reboot the system
 ```
-sh-4.3# exit out 
+sh-4.3# exit
+root@arch ~ # umount /dev/sda1
+root@arch ~ # reboot
+
 ```
+
+
+## Create a new user
 
 ```bash
-root@arch ~ # genfstab /mnt >> /mnt/etc/fstab
+root@myhostname ~ #  useradd -m -g users -s /bin/bash username
+root@myhostname ~ #  passwd username
+root@myhostname ~ #  EDITOR=nano visudo
+
 ```
-
-```bash
-root@arch ~ # umount /mnt
+Uncomment this line in this file(remove #):
 ```
+#%wheel ALL=(ALL) ALL
 
-## Reboot the system
-
-```bash
-root@arch ~ #  reboot
+root@myhostname ~ #  gpasswd -a username wheel
+root@myhostname ~ #  gpasswd -a username storage
+root@myhostname ~ #  gpasswd -a username power
+root@myhostname ~ #  gpasswd -a username lp
+root@myhostname ~ #  gpasswd -a username network
+root@myhostname ~ #  gpasswd -a username audio
+root@myhostname ~ #  gpasswd -a username video
+root@myhostname ~ #  gpasswd -a username optical
+root@myhostname ~ #  gpasswd -a username games
 ```
 
 --
 
 ## Setup the system
 
+##### enable network
+```
+root@myhostname ~ # ip addr
+root@myhostname ~ # systemctl start dhcpcd@enp4s0.service
+root@myhostname ~ # systemctl enable dhcpcd@enp4s0.service
+```
+
 
 ##### Setup network, power manager, printer, DNS-SD framework, message bus system
 ```
-$ sudo pacman -Sy networkmanager-dispatcher-ntpd cronie networkmanager network-manager-applet acpid cups avahi dbus udisks2
+root@myhostname ~ # pacman -Sy ntp cronie  acpid cups avahi dbus 
 ```
 
 ```
-$ systemctl enable NetworkManager
-$ systemctl enable cronie
-$ systemctl enable ntpd
-$ systemctl enable acpid
-$ systemctl enable avahi-daemon
+root@myhostname ~ # systemctl enable systemctl enable org.cups.cupsd.service
+root@myhostname ~ # systemctl enable cronie
+root@myhostname ~ # systemctl enable ntpd
+root@myhostname ~ # systemctl enable acpid
+root@myhostname ~ # systemctl enable avahi-daemon
+```
+
+#### Time Configuration
+```
+root@myhostname ~ # nano /etc/ntp.conf
+
+replace the first line server 0.arch.pool.ntp.org wuth
+
+server de.pool.ntp.org
+
+root@myhostname ~ # ntpd -gq
+root@myhostname ~ # hwclock -w
+
+```
+
+#### Install and configuration X
+```
+root@myhostname ~ # pacman -S xorg-server xorg-xinit xorg-utils xorg-server-utils
+root@myhostname ~ # pacman -S xorg-drivers
+
+```
+
+#### Keyboard install
+```
+root@myhostname ~ # pacman -S xf86-input-synaptics
+root@myhostname ~ # nano /etc/X11/xorg.conf.d/20-keyboard.conf 
+
+Section "InputClass"
+      Identifier "keyboard"
+      MatchIsKeyboard "yes"
+      Option "XkbLayout" "de"
+      Option "XkbModel" "pc105"
+      Option "XkbVariant" "nodeadkeys"
+EndSection
+
+or do
+root@myhostname ~ # localectl set-x11-keymap de pc105 de_nodeadkeys
+
+```
+
+#### Mouse install
+```
+root@myhostname ~ # nano /etc/X11/xorg.conf.d/70-synaptics.conf
+
+Section "InputClass"
+    Identifier "touchpad"
+    Driver "synaptics"
+    MatchIsTouchpad "on"
+        Option "TapButton1" "1"
+        Option "TapButton2" "3"
+        Option "TapButton3" "2"
+        Option "VertEdgeScroll" "on"
+        Option "VertTwoFingerScroll" "on"
+        Option "HorizEdgeScroll" "on"
+        Option "HorizTwoFingerScroll" "on"
+        Option "CircularScrolling" "on"
+        Option "CircScrollTrigger" "2"
+        Option "EmulateTwoFingerMinZ" "40"
+        Option "EmulateTwoFingerMinW" "8"
+        Option "CoastingSpeed" "0"
+        Option "FingerLow" "30"
+        Option "FingerHigh" "50"
+        Option "MaxTapTime" "125"
+EndSection
 ```
 
 #### Alsa install
 
 ```bash
-$ sudo pacman -S alsa-utils alsa-plugins alsa-lib pulseaudio-alsa
-$ sudo pacman -S pavucontrol pulseaudio
-```
-
-#### Open sound manager
-```
-$ alsamixer
-```
-
-#### Toggle mute
-```
-$ amixer -q set Master toggle
-```
-#### Volume Down
-```
-$ amixer -q set PCM 2- unmute
-```
-#### Volume Up
-```
-amixer -q set PCM 2+ unmut
-```
-
-##### Create new user
-
-```
-# useradd -m -g users -G wheel,storage,power,lp,network,audio,video,optical -s /bin/bash username
-# passwd username
-```
-
-```
-# EDITOR=nano visudo
-```
-Uncomment this line in this file:
-```
-%wheel ALL=(ALL) ALL
-```
-
-```
-# pacman -S xorg-server xorg-xinit xorg-utils xorg-server-utils mesa
-```
-Select Option #2  Nvidia 340xx package
-
-```
-# pacman -S xorg-twm xterm xorg-xclock
-```
-
-Search for Nvidia driver
-```
-# pacman –Ss | grep nvidia
+root@myhostname ~ # pacman -S alsa-utils alsa-plugins alsa-lib pulseaudio-alsa
+root@myhostname ~ # pacman -S pavucontrol
 ```
 
 
-Install Nvidia
-```
-# pacman -S nvidia-340xx
-# nvidia-xconfig
-```
-
-Install GNOME Desktop Environment
+#### Install GNOME Desktop Environment
 
 ```
-# sudo pacman -S gnome gnome-extra
-# sudo systemctl enable gdm
-```
-
-
-## Enable multilib repository
-```
-# nano /etc/pacman.conf
-```
-Scroll down and un-comment the ‘multilib’ repo:
-```
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-```
-
-```
-# pacman -Sy
+root@myhostname ~ # pacman -S gnome gnome-extra
+root@myhostname ~ # systemctl enable gdm
 ```
 
 
 ## Install Software
 
 ```
-# pacman -S firefox, terminator, vlc, skype, synergy, sublime-text
+root@myhostname ~ # pacman -S firefox firefox-i18n-de chromium vlc docker
+root@myhostname ~ # pacman -S flashplugin icedtea-web
+
 ```
 
 
 ### Reboot System
 ```
-# reboot
+root@myhostname ~ # reboot
 ```
 
 
@@ -256,104 +284,68 @@ run:
 $ pacman -Sy yaourt
 ```
 
+## How to skip all Yaourt prompts on Arch Linux
+
+[Yaourt](https://wiki.archlinux.org/index.php/yaourt) is probably the best tool to automatically download and install packages from the [Arch User Repository](https://aur.archlinux.org/), also known as AUR. It’s really powerful; however, by default, it prompts you a **LOT** for confirmations of different things, such as checking if you want to install something, if you want to edit the `PKGBUILD`, etc. As a result, Yaourt is pretty annoying if you’re used to the hands-free nature of most other package managers.
+
+As it turns out, there is a file you can create called `~/.yaourtrc` that can change the behavior of Yaourt.
+
+To turn off all of the prompts, type the following into a new file called `~/.yaourtrc`:
+
+```
+NOCONFIRM=1
+BUILD_NOCONFIRM=1
+EDITFILES=0
+```
+
+The first line will skip the messages confirming if you really want to install the package.
+
+The second line will skip the messages asking you if you want to continue the build.
+
+The third and last line will skip the messages asking if you want to edit the `PKGBUILD` files.
+
+When you’re done doing this, Yaourt should now stop being a pain to use. Have fun with your hands-free installs!
+
+--
+
+
+### Upgrade Foreign packages
+
+```
+yaourt -Syua
+```
+
+--
+
+
 
 Install AUR Packages
 
 ```
 $ yaourt -S ttf-ms-fonts
-$ yaourt -S fontconfig-ubuntu
-$ yaourt -S freetype2-ubuntu
-$ yaourt -S ttf-noto
+$ yaourt -S paper-gtk-theme-git
 $ yaourt -S ttf-mac-fonts
 $ yaourt -S ttf-tahoma
 $ yaourt -S jdk
 $ yaourt -S intellij-idea-ultimate-edition
-$ yaourt -S ubuntu-themes
-$ yaourt -S spotify
-$ yaourt -S yaourt moka-icon-theme-git
+$ yaourt -S flattr-icon-theme
 $ yaourt -S gnome-session-properties
 ```
 
 --
 
-### Install Docker
+### Install Network
 ```
-$ sudo pacman -S docker
-```
-Install Container: Postgres, MySQL, Nginx, JHipster, Gitlab-CI-Runner, Jenkins
-
-
---
-
-### Setup Network File System (NFS)
-
-Installation
-```
-$ pacman -S nfs-utils 
+$ sudo pacman -S networkmanager-dispatcher-ntpd networkmanager network-manager-applet
+$ sudo systemctl enable NetworkManager
 ```
 
-Start server
-```
-$ sudo systemctl enable rpcbind.service
-$ sudo systemctl start rpcbind.service
-$ sudo systemctl enable nfs-client.target
-$ sudo systemctl start nfs-client.target
-$ sudo systemctl start remote-fs.target
-```
-
-Manual mounting
-Show the server's exported file systems:
-```
-$ showmount -e DiskStation 
-```
-
-Then mount omitting the server's NFS export root:
-```
-# sudo mount -t nfs DiskStation:/volume1/video /home/username/Videos
-```
-(Make sure Videos folder exist in /username/home/Videos)
 
 --
 
-### Install OpenConnect (Cisco AnyConnect)
 
-Install the networkmanager-openconnect package from the Official repositories
-```
-$ sudo pacman -S networkmanager-openconnect
-```
 
-Download a more up-to-date script that OpenConnect will use to setup routing and DNS information (the only difference, currently, between this script and the one that comes with vpnc is using /usr/sbin/resolvconf instead of /sbin/resolvconf, there should be an AUR package for this eventually):
-
-```
-# wget http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script
-```
-Replace references to /sbin/resolvconf with /usr/bin/resolvconf:
-```
-$ sed -i 's/\/sbin\/resolvconf/\/usr\/bin\/resolvconf/g' vpnc-script
-```
-Make it executable:
-```
-$ chmod +x vpnc-script
-```
-Now run OpenConnect as root with the script downloaded above, and provide the gateway:
-```
-$ sudo openconnect --script ./vpnc-script https://vpn.system.com
-```
-It will ask you to enter GROUP Name:
-```
-Please enter your username and password.
-GROUP: [User|Manager]: 
-```
-then,
-```
-Please enter your username and password.
-Username:
-Password:
-```
-
-Use ctrl-c to close and tear down the vpn connection.
-
----
+--
 
 ### Setup Albert 
 
@@ -401,38 +393,6 @@ GRUB_GFXMODE=1024x768</code>
 --
 
 
-## How to skip all Yaourt prompts on Arch Linux
-
-[Yaourt](https://wiki.archlinux.org/index.php/yaourt) is probably the best tool to automatically download and install packages from the [Arch User Repository](https://aur.archlinux.org/), also known as AUR. It’s really powerful; however, by default, it prompts you a **LOT** for confirmations of different things, such as checking if you want to install something, if you want to edit the `PKGBUILD`, etc. As a result, Yaourt is pretty annoying if you’re used to the hands-free nature of most other package managers.
-
-As it turns out, there is a file you can create called `~/.yaourtrc` that can change the behavior of Yaourt.
-
-To turn off all of the prompts, type the following into a new file called `~/.yaourtrc`:
-
-```
-NOCONFIRM=1
-BUILD_NOCONFIRM=1
-EDITFILES=0
-```
-
-The first line will skip the messages confirming if you really want to install the package.
-
-The second line will skip the messages asking you if you want to continue the build.
-
-The third and last line will skip the messages asking if you want to edit the `PKGBUILD` files.
-
-When you’re done doing this, Yaourt should now stop being a pain to use. Have fun with your hands-free installs!
-
---
-
-
-### Upgrade Foreign packages
-
-```
-yaourt -Syua
-```
-
---
 
 ### Arch Linux Pacman 
 
