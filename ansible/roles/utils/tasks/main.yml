@@ -1,0 +1,56 @@
+---
+- name: Installation System Utilities
+  pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+  become: yes
+  with_items:
+    - htop
+    - docker
+    - nasm
+    - vim
+    - cloc
+    - openssh
+    - tmux
+
+- name: Installation Webbrowser
+  pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+  become: yes
+  with_items:
+    - firefox
+    - firefox-i18n-de
+    - chromium
+    - flashplugin
+    - icedtea-web
+
+- name: Installation Disk Utilities
+ pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+ become: yes
+ with_items:
+   - gparted
+   - lshw
+   - lsof
+
+- name: Installation NodeJs Environment
+ pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+ become: yes
+ with_items:
+   - npm
+   - nodejs
+
+- name: Installation Latex
+ pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+ become: yes
+ with_items:
+   - texlive-most
+   - texlive-lang
+
+- name: Installation Alsa
+ pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+ become: yes
+ with_items:
+   - alsa-utils
+   - alsa-plugins
+   - alsa-lib
+   - pulseaudio-alsa
+   - pavucontrol
+
+...

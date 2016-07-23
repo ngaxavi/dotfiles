@@ -1,0 +1,12 @@
+# ansible-playbook -i hosts install.yml
+---
+ - name: Installation Software
+   hosts: localhost
+   connection: local
+   remote_user: ngansop
+   roles:
+     - yaourt
+     - utils
+
+
+...
