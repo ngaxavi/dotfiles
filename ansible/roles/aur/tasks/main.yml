@@ -1,11 +1,16 @@
 ---
 - name: Installation Paper themes and Flattr Icon
-  yaourt: name={{ item }} state=present
+  command: yaourt -Sy {{ item }}
   with_items:
     - paper-gtk-theme-git
     - paper-icon-theme-git
     - flattr-icon-theme
 
 - name: Installation Latex Editor
-  yaourt: name=latexilla state=present
+  comand: yaourt -Sy latexila
 
+- name: Installation Editor and IDEA
+  command: yaourt -S {{ item }}
+  with_items:
+    - intellij-idea-ultimate-edition
+    - atom-editor

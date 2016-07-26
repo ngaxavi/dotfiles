@@ -1,6 +1,11 @@
 ---
+- name: Upgrade All Packages | System
+  pacman: update_cache=yes upgrade=yes
+  become: yes
+
+
 - name: Installation System Utilities
-  pacman: name={{item}} update_cache=yes upgrade=yes state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - htop
@@ -10,9 +15,10 @@
     - cloc
     - openssh
     - tmux
+    - wget
 
 - name: Installation Webbrowser
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - firefox
@@ -22,7 +28,7 @@
     - icedtea-web
 
 - name: Installation Disk Utilities
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - gparted
@@ -30,21 +36,21 @@
     - lsof
 
 - name: Installation NodeJs Environment
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - npm
     - nodejs
 
 - name: Installation Latex
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - texlive-most
     - texlive-lang
 
 - name: Installation Alsa
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   become: yes
   with_items:
     - alsa-utils
@@ -52,5 +58,13 @@
     - alsa-lib
     - pulseaudio-alsa
     - pavucontrol
+
+- name: Change NPM permission
+  command:
+    - mkdir ~/.npm-global
+    - npm config set prefix '~/.npm-global'
+    - echo  export PATH=~/.npm-global/bin:$PATH > ~/.profile
+    - source ~/.profile
+
 
 ...

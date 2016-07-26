@@ -3,10 +3,12 @@
  - name: Installation Software
    hosts: localhost
    connection: local
-   remote_user: ngansop
+   remote_user: {{ user.name }}
    roles:
      - yaourt
      - utils
+     - aur
+     - npm
 
 
 ...

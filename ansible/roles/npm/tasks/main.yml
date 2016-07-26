@@ -1,0 +1,9 @@
+---
+- name: Installation DevTools
+  npm: name={{item}} global=yes
+  with_items:
+    - bower
+    - generator-jhipster
+    - gulp
+    - grunt-cli
+    
