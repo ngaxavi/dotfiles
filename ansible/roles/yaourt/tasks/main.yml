@@ -1,12 +1,12 @@
 ---
-- name: "Add yaourt repository to pacman"
+- name: Add Yaourt Repository to Pacman
   lineinfile: dest=/etc/pacman.conf state=present line={{ item }}
   with_items:
-    - "[archlinuxfr]"
-    - "SigLevel = Never"
-    - "Server = http://repo.archlinux.fr/$arch"
+    - [archlinuxfr]
+    - SigLevel = Never
+    - Server = http://repo.archlinux.fr/$arch
   when: ansible_distribution == "ArchLinux"
 
-- name: "install yaourt"
+- name: Install Yaourt
   pacman: name=yaourt  state=present
   when: ansible_distribution == "ArchLinux"

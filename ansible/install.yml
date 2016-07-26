@@ -1,4 +1,4 @@
-# ansible-playbook -i , install.yml
+# ansible-playbook -i "local," install.yml
 ---
  - name: Installation Software
    hosts: localhost

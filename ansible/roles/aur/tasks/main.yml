@@ -1,0 +1,11 @@
+---
+- name: Installation Paper themes and Flattr Icon
+  yaourt: name={{ item }} state=present
+  with_items:
+    - paper-gtk-theme-git
+    - paper-icon-theme-git
+    - flattr-icon-theme
+
+- name: Installation Latex Editor
+  yaourt: name=latexilla state=present
+
