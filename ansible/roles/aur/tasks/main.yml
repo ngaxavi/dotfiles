@@ -9,8 +9,9 @@
 - name: Installation Latex Editor
   comand: yaourt -Sy latexila
 
-- name: Installation Editor and IDEA
+- name: Installation Java, Editor and IDEA
   command: yaourt -S {{ item }}
   with_items:
+    - jdk
     - intellij-idea-ultimate-edition
     - atom-editor
