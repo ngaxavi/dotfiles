@@ -4,4 +4,4 @@
     become: yes
 
   - name: Copy Tmux Configuration
-    copy: src=tmux.j2 dest=/home/{{user.name}}/.tmux.conf mode=0755
+    copy: src=tmux.j2 dest=/home/{{username}}/.tmux.conf mode=0755

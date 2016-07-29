@@ -3,24 +3,29 @@
     pacman: name=fish state=present
     become: yes
 
-  - name: Installation Oh my fish
-    command: curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+  - name: Download Oh my fish
+    get_url: url=https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install dest=/home/{{username}}/install
+
+  - stat: path=/home/{{username}}/.local/share/omf
+    register: omf
+
+  - name: Installation oh my fish
+    command: fish /home/{{username}}/install
+    when: omf.stat.isdir is defined and omf.stat.dir
 
   - name: Set fish shell as default shell
-    command: chsk -s /usr/bin/fish
+    command: chsh -s /usr/bin/fish
     become: yes
 
-  - name: Installation fish theme Pure
-    command: omf install pure
+  - name: change to fish shell
+    command: fish
+
 
   - name: Set Configuration
-    template: src=/templates/config.j2 dest=/home/{{user.name}}/.config/fish/config.fish
-
-  - name: Disable Greeting message
-    command: set --universal fish_greeting
+    template: src=config.j2 dest=/home/{{username}}/.config/fish/config.fish
 
   - name: Copy functions
-    copy: src={{ item }}.j2 dest=/home/{{user.name}}/.config/fish/functions/{{ item }}.fish
+    copy: src={{ item }}.j2 dest=/home/{{username}}/.config/fish/functions/{{ item }}.fish
     with_items:
       - reload
       - sudo!!

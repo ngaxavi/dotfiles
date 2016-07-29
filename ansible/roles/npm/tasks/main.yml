@@ -4,19 +4,21 @@
   pacman: name=npm state=present
   become: yes
 
-- name: Change NPM permission
-  command: {{ item }}
-  with_items:
-      - mkdir /home/{{user.name}}/.npm-global
-      - npm config set prefix '/home/{{user.name}}/.npm-global'
+- name: Create NPM directory
+  file:  name=/home/{{username}}/.npm-global state=directory
 
-- name: Copy NPM Configuration
-  copy: src=profile.j2 dest=/home/{{user.name}}/.profile
-  command: source /home/{{user.name}}/.profile
+- name: Set NPM directory
+  command: npm config set prefix /home/{{username}}/.npm-global
+
+- name: Write profile file
+  copy: src=profile.j2 dest=/home/{{username}}/.profile
+
+- name: Update bashrc
+  shell: . /home/{{username}}/.profile
 
 
 - name: Installation DevTools
-  npm: name={{item}} state=present global=yes 
+  npm: name={{item}} state=present global=yes
   with_items:
     - bower
     - generator-jhipster

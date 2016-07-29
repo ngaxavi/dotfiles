@@ -1,14 +1,14 @@
 # ansible-playbook -i "local," install.yml
 ---
  - name: Installation Software
-   hosts: local
+   hosts: localhost
    connection: local
-   remote_user: {{ user.name }}
+   remote_user: ngansop
    roles:
      - yaourt
-     - base16
      - tmux
      - aur
+     - base16
      - npm
      - fish
 

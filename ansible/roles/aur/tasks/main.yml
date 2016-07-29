@@ -1,23 +1,23 @@
 ---
 - name: Installation Paper themes and Flattr Icon
-  command: yaourt -Sy {{ item }}
+  command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
     - paper-gtk-theme-git
     - paper-icon-theme-git
     - flattr-icon-theme
 
 - name: Installation Latex Editor
-  comand: yaourt -Sy latexila
+  command: yaourt -S latexila --noconfirm --needed
 
 - name: Installation Java, Editor and IDEA
-  command: yaourt -S {{ item }}
+  command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
     - jdk
     - intellij-idea-ultimate-edition
     - atom-editor
 
 - name: Installation Fonts
-  command: yaourt -S {{ item }}
+  command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
     - ttf-ms-fonts
     - ttf-mac-fonts
