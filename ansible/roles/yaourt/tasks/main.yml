@@ -10,3 +10,6 @@
 - name: Install Yaourt
   pacman: name=yaourt  state=present
   when: ansible_distribution == "ArchLinux"
+
+- name: Add yaourt Configuration file
+  copy: src=yaourtrc.j2  dest=/home/{{user.name}}/.yaourtrc

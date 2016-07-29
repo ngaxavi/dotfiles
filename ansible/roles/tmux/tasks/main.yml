@@ -1,0 +1,7 @@
+---
+  - name: Installation tmux
+    pacman: name=tmux state=present
+    become: yes
+
+  - name: Copy Tmux Configuration
+    copy: src=tmux.j2 dest=/home/{{user.name}}/.tmux.conf mode=0755

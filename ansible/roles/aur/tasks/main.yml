@@ -15,3 +15,10 @@
     - jdk
     - intellij-idea-ultimate-edition
     - atom-editor
+
+- name: Installation Fonts
+  command: yaourt -S {{ item }}
+  with_items:
+    - ttf-ms-fonts
+    - ttf-mac-fonts
+    - ttf-monaco

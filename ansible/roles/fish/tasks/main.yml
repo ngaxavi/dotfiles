@@ -1,0 +1,27 @@
+---
+  - name: Installation fish shell
+    pacman: name=fish state=present
+    become: yes
+
+  - name: Installation Oh my fish
+    command: curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+
+  - name: Set fish shell as default shell
+    command: chsk -s /usr/bin/fish
+    become: yes
+
+  - name: Installation fish theme Pure
+    command: omf install pure
+
+  - name: Set Configuration
+    template: src=/templates/config.j2 dest=/home/{{user.name}}/.config/fish/config.fish
+
+  - name: Disable Greeting message
+    command: set --universal fish_greeting
+
+  - name: Copy functions
+    copy: src={{ item }}.j2 dest=/home/{{user.name}}/.config/fish/functions/{{ item }}.fish
+    with_items:
+      - reload
+      - sudo!!
+      - fish_prompt

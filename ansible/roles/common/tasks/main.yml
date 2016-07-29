@@ -14,8 +14,8 @@
     - vim
     - cloc
     - openssh
-    - tmux
     - wget
+
 
 - name: Installation Webbrowser
   pacman: name={{item}} state=present
@@ -25,7 +25,7 @@
     - firefox-i18n-de
     - chromium
     - flashplugin
-    - icedtea-web
+
 
 - name: Installation Disk Utilities
   pacman: name={{item}} state=present
@@ -34,13 +34,14 @@
     - gparted
     - lshw
     - lsof
+    - tree
+    - cloc
+
 
 - name: Installation NodeJs Environment
-  pacman: name={{item}} state=present
+  pacman: name=nodejs state=present
   become: yes
-  with_items:
-    - npm
-    - nodejs
+
 
 - name: Installation Latex
   pacman: name={{item}} state=present
@@ -48,6 +49,7 @@
   with_items:
     - texlive-most
     - texlive-lang
+
 
 - name: Installation Alsa
   pacman: name={{item}} state=present
@@ -58,13 +60,5 @@
     - alsa-lib
     - pulseaudio-alsa
     - pavucontrol
-
-- name: Change NPM permission
-  command:
-    - mkdir ~/.npm-global
-    - npm config set prefix '~/.npm-global'
-    - echo  export PATH=~/.npm-global/bin:$PATH > ~/.profile
-    - source ~/.profile
-
 
 ...
