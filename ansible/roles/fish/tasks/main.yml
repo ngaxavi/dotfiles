@@ -11,7 +11,7 @@
 
   - name: Installation oh my fish
     command: fish /home/{{username}}/install
-    when: omf.stat.isdir is defined and omf.stat.dir
+    when: omf.stat.isdir is not defined and omf.stat.dir == False
 
   - name: Set fish shell as default shell
     command: chsh -s /usr/bin/fish
@@ -28,5 +28,5 @@
     copy: src={{ item }}.j2 dest=/home/{{username}}/.config/fish/functions/{{ item }}.fish
     with_items:
       - reload
-      - sudo!!
+      - sudo !!
       - fish_prompt
