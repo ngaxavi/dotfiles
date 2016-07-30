@@ -18,3 +18,6 @@
 
   - name: base16 - set default terminal profile
     command: gconftool-2 --set /apps/gnome-terminal/global/default_profile --type string "base-16-default-dark"
+
+  - name: base-16 - get base16-shell so that colors show up correctly in vim
+    git: repo=https://github.com/chriskempson/base16-shell.git dest=/home/{{username}}/.config/base16-shell

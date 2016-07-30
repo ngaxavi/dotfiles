@@ -6,6 +6,7 @@
    remote_user: ngansop
    roles:
      - yaourt
+     - common
      - tmux
      - aur
      - base16

@@ -12,7 +12,6 @@
     - docker
     - nasm
     - vim
-    - cloc
     - openssh
     - wget
 

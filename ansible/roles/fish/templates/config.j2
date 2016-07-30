@@ -13,7 +13,9 @@ set -U fish_greeting
 
 # Base16 Shell
 # Check base16 on github
-eval sh $HOME/.config/base16-shell/base16-default.dark.sh
+if status --is-interactive
+  eval sh $HOME/.config/base16-shell/base16-default.dark.sh
+end
 
 # Path
 #set -U fish_user_paths $fish_user_paths /usr/lib/python3.5/site-packages/powerline
