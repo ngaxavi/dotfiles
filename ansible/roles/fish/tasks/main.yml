@@ -3,23 +3,9 @@
     pacman: name=fish state=present
     become: yes
 
-  - name: Download Oh my fish
-    get_url: url=https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install dest=/home/{{username}}/install
-
-  - stat: path=/home/{{username}}/.local/share/omf
-    register: omf
-
-  - name: Installation oh my fish
-    command: fish /home/{{username}}/install
-    when: omf.stat.isdir is not defined and omf.stat.dir == False
-
   - name: Set fish shell as default shell
     command: chsh -s /usr/bin/fish
     become: yes
-
-  - name: change to fish shell
-    command: fish
-
 
   - name: Set Configuration
     template: src=config.j2 dest=/home/{{username}}/.config/fish/config.fish
