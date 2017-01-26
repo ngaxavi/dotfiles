@@ -25,3 +25,4 @@
     - gulp
     - grunt-cli
     - yo
+    - yarn

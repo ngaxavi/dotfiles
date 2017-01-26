@@ -3,7 +3,7 @@
  - name: Installation Software
    hosts: localhost
    connection: local
-   remote_user: ngansop
+   remote_user: {{username}}
    roles:
      - yaourt
      - common

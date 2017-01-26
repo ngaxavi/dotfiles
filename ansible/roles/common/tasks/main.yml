@@ -22,7 +22,6 @@
   with_items:
     - firefox
     - firefox-i18n-de
-    - chromium
     - flashplugin
 
 
@@ -59,5 +58,16 @@
     - alsa-lib
     - pulseaudio-alsa
     - pavucontrol
+
+- name: Installation Atom Editor
+  pacman: name=atom state=present
+  become: yes
+
+- name: Installation Inkspace and Gimp
+  pacman: name={{item}} state=present
+  become: yes
+  with_items:
+    - inkspace
+    - gimp 
 
 ...
