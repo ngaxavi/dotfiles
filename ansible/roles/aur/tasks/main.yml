@@ -24,5 +24,8 @@
     - ttf-mac-fonts
     - ttf-monaco
 
-- name: Installation Google Chrome
-  command: pacman -S google-chrome --noconfirm --needed
+- name: Installation Google Chrome and Franz
+  command: yaourt -S {{item}} --noconfirm --needed
+  with_items:
+    - google-chrome
+    - franz-bin
