@@ -14,6 +14,7 @@
     - vim
     - openssh
     - wget
+    - tlp
 
 
 - name: Installation Webbrowser
@@ -68,6 +69,6 @@
   become: yes
   with_items:
     - inkspace
-    - gimp 
+    - gimp
 
 ...

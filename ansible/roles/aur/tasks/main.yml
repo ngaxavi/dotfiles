@@ -17,6 +17,14 @@
     - intellij-idea-ultimate-edition
     - visual-studio-code
 
+- name: Installation Utilities
+  command: yaourt -S {{ item }} --noconfirm --needed
+  with_items:
+    - gitkraken
+    - dbeaver
+    - go-for-it
+    - teamviewer
+
 - name: Installation Fonts
   command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
