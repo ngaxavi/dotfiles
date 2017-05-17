@@ -24,6 +24,7 @@
     - dbeaver
     - go-for-it
     - teamviewer
+    - qownnotes
 
 - name: Installation Fonts
   command: yaourt -S {{ item }} --noconfirm --needed
@@ -31,6 +32,7 @@
     - ttf-ms-fonts
     - ttf-mac-fonts
     - ttf-monaco
+    - nerd-fonts-complete
 
 - name: Installation Google Chrome and Franz
   command: yaourt -S {{item}} --noconfirm --needed

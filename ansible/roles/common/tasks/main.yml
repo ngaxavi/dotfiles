@@ -36,6 +36,10 @@
     - tree
     - cloc
 
+- name: Installation Tilix
+  pacman: name=tilix state=present
+  become: yes
+
 
 - name: Installation NodeJs Environment
   pacman: name=nodejs state=present
