@@ -5,24 +5,26 @@
   become: yes
 
 - name: Create NPM directory
-  file:  name=/home/{{username}}/.npm-global state=directory
+  file:  name=/home/{{ username }}/.npm-global state=directory
 
 - name: Set NPM directory
-  command: npm config set prefix /home/{{username}}/.npm-global
+  command: npm config set prefix /home/{{ username }}/.npm-global
 
 - name: Write profile file
-  copy: src=profile.j2 dest=/home/{{username}}/.profile
+  copy: src=profile.j2 dest=/home/{{ username }}/.profile
 
 - name: Update bashrc
-  shell: . /home/{{username}}/.profile
+  shell: . /home/{{ username }}/.profile
 
 
 - name: Installation DevTools
-  npm: name={{item}} state=present global=yes
+  npm: name={{ item }} state=present global=yes
   with_items:
     - bower
     - generator-jhipster
     - gulp
-    - grunt-cli
     - yo
     - yarn
+
+- name: Installation Angular CLI
+  npm: name=@angular/cli state=present global=yes

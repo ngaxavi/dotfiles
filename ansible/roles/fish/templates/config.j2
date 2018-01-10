@@ -10,22 +10,8 @@ source $OMF_PATH/init.fish
 # Disable the Greeting message
 set -U fish_greeting
 
+#Eclipse
+set SWT_GTK3 0
 
-# Base16 Shell
-# Check base16 on github
-if status --is-interactive
-  eval sh $HOME/.config/base16-shell/scripts/base16-default-dark.sh
-end
-
-# Path
-#set -U fish_user_paths $fish_user_paths /usr/lib/python3.5/site-packages/powerline
-
-# Powerline
-#set fish_function_path $fish_function_path "/usr/lib/python3.5/site-packages/powerline/bindings/fish" powerline-setup
-
-# If not running interactively, do not do anything
-#if status --is-interactive
-#   if test -z (echo $TMUX)
-#	tmux
-#   end
-#end
+#NPM
+set -x PATH $PATH $HOME/.npm-global/bin

@@ -1,21 +1,25 @@
 ---
-- name: Installation Paper themes and Flattr Icon
+- name: Installation Themes and Icons
   command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
     - paper-gtk-theme-git
     - paper-icon-theme-git
     - flattr-icon-theme
     - gtk-theme-arc-flatabulous-git
+    - flat-remix-git
+    - system-san-francisco-font-git
 
-- name: Installation Latex Editor
-  command: yaourt -S latexila --noconfirm --needed
 
 - name: Installation Java, Editor and IDEA
   command: yaourt -S {{ item }} --noconfirm --needed
   with_items:
     - jdk
+    - jdk8
     - intellij-idea-ultimate-edition
-    - visual-studio-code
+    - webstorm
+    - phpstorm
+    - pycharm-professional
+    - visual-studio-code-bin
 
 - name: Installation Utilities
   command: yaourt -S {{ item }} --noconfirm --needed
@@ -24,7 +28,10 @@
     - dbeaver
     - go-for-it
     - teamviewer
-    - qownnotes
+    - dropbox
+    - tilix
+    - google-chrome
+    - typora
 
 - name: Installation Fonts
   command: yaourt -S {{ item }} --noconfirm --needed
@@ -33,9 +40,8 @@
     - ttf-mac-fonts
     - ttf-monaco
     - nerd-fonts-complete
+    - ttf-google-fonts
+    - ttf-font-awesome
 
-- name: Installation Google Chrome and Franz
-  command: yaourt -S {{item}} --noconfirm --needed
-  with_items:
-    - google-chrome
-    - franz-bin
+
+  

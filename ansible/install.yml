@@ -7,7 +7,6 @@
    roles:
      - yaourt
      - common
-     - tmux
      - aur
      - base16
      - npm

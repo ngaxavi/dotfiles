@@ -5,7 +5,7 @@
 
 
 - name: Installation System Utilities
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
     - htop
@@ -18,7 +18,7 @@
 
 
 - name: Installation Webbrowser
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
     - firefox
@@ -27,7 +27,7 @@
 
 
 - name: Installation Disk Utilities
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
     - gparted
@@ -35,10 +35,22 @@
     - lsof
     - tree
     - cloc
+    - ntfs-3g
 
-- name: Installation Tilix
-  pacman: name=tilix state=present
+- name: Installation Others
+  pacman: name={{ item }} state=present
   become: yes
+  with_items:
+    - zeal
+    - mariadb
+    - eclipse-jee
+    - filezilla
+    - maven
+    - gradle
+    - make
+    - sqlmap
+    - whois
+    - mupdf
 
 
 - name: Installation NodeJs Environment
@@ -47,15 +59,16 @@
 
 
 - name: Installation Latex
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
+    - latexila
     - texlive-most
     - texlive-lang
 
 
 - name: Installation Alsa
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
     - alsa-utils
@@ -64,15 +77,26 @@
     - pulseaudio-alsa
     - pavucontrol
 
-- name: Installation Atom Editor
-  pacman: name=atom state=present
-  become: yes
 
 - name: Installation Inkspace and Gimp
-  pacman: name={{item}} state=present
+  pacman: name={{ item }} state=present
   become: yes
   with_items:
     - inkspace
     - gimp
+
+- name: Installation PHP Utilities
+  pacman: name = {{ item }} state=present
+  become: yes 
+  with_items:
+    - php 
+    - composer
+    - xdebug
+    - php-apcu
+    - php-gd
+    - php-intl
+    - php-mcrypt
+    - php-sqlite
+    - php-pgsql
 
 ...

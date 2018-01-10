@@ -1,23 +1,6 @@
 ---
   - name: Base 16 -  Checkout Repository
-    git: repo=https://github.com/chriskempson/base16-gnome-terminal.git dest=/home/{{ username }}/.config/base16-gnome-terminal
-
-  - name: Base16 - copy default-dark
-    copy: src=/home/{{username}}/.config/base16-gnome-terminal/base16-default.dark.sh
-          dest=/home/{{username}}/base16-default.dark.sh
-          mode=0755
+    git: repo=https://github.com/aaron-williamson/base16-gnome-terminal.git dest=/home/{{ username }}/.config/base16-gnome-terminal
 
   - name: Base16 - install default dark
-    shell: /home/{{username}}/base16-default.dark.sh
-
-  - name: base16 - set system font to source code pro
-    command: gconftool-2 --set /apps/gnome-terminal/profiles/base-16-default-dark/font --type string "Monaco Bold 11"
-
-  - name: base16 - dont use default system font in terminal
-    command: gconftool-2 --set /apps/gnome-terminal/profiles/base-16-default-dark/use_system_font --type bool 0
-
-  - name: base16 - set default terminal profile
-    command: gconftool-2 --set /apps/gnome-terminal/global/default_profile --type string "base-16-default-dark"
-
-  - name: base-16 - get base16-shell so that colors show up correctly in vim
-    git: repo=https://github.com/chriskempson/base16-shell.git dest=/home/{{username}}/.config/base16-shell
+    shell: /home/{{username}}/.config/base16-gnome-terminal/color-scripts/base16-default-dark.sh
