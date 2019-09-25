@@ -1,0 +1,17 @@
+---
+- name: Install Bash
+  pacman:
+    name:
+      - bash
+      - bash-completion
+    state: present
+  tags:
+    - shell
+
+- name: Install Fish
+  pacman:
+    name:
+      - fish
+    state: present
+  tags:
+    - shell

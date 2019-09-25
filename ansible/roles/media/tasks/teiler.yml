@@ -1,0 +1,10 @@
+---
+- name: Install teiler and dependencies
+  aur:
+    name:
+      - xininfo-git
+      - teiler-git
+    user: "{{ user.name }}"
+  tags:
+    - aur
+    - teiler

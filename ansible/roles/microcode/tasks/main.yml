@@ -1,0 +1,7 @@
+---
+- name: Install amd microcode
+  pacman:
+    name: amd-ucode
+    state: present
+  notify:
+    - rebuild grub

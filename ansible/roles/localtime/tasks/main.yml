@@ -1,0 +1,7 @@
+---
+- name: Install localtime
+  aur:
+    name: localtime-git
+    user: { { user.name } }
+  tags:
+    - aur

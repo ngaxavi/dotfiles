@@ -1,0 +1,69 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - { role: base, tags: ["base"] }
+    - { role: gnupg, tags: ["gnupg"] }
+    - { role: cron, tags: ["cron"] }
+    - {
+        role: microcode,
+        tags: ["microcode"],
+        when: "'AuthenticAMD' in ansible_processor",
+      }
+    - { role: fish, tags: ["fish"] }
+    - { role: hardened, tags: ["hardened"] }
+    - { role: ssh, tags: ["ssh"] }
+    - { role: dotfiles, tags: ["dotfiles"] }
+    - { role: ssd, tags: ["ssd"] }
+    - { role: fonts, tags: ["fonts"] }
+    - { role: x, tags: ["x"] }
+    - { role: lightdm, tags: ["lightdm"], when: "display_manager == 'lightdm'" }
+    - { role: gdm, tags: ["gdm"], when: "display_manager == 'gdm'" }
+    - { role: gnome, tags: ["gnome"], when: "desktop_environment == 'gnome'" }
+    - { role: pass, tags: ["pass"] }
+    - { role: iptables, tags: ["iptables"] }
+    - { role: nettools, tags: ["nettools"] }
+    - { role: networkmanager, tags: ["networkmanager"] }
+    - { role: macchiato, tags: ["macchiato"] }
+    - { role: ntp, tags: ["ntp"] }
+    - { role: firejail, tags: ["firejail"] }
+    - { role: tor, tags: ["tor"], when: "tor is defined" }
+    - { role: unbound, tags: ["unbound"] }
+    - { role: editors, tags: ["editors"] }
+    - { role: filesystems, tags: ["filesystems"] }
+    - { role: archive, tags: ["archive"] }
+    - { role: udisks, tags: ["udisks"] }
+    - { role: spell, tags: ["spell"] }
+    - { role: browsers, tags: ["browsers"] }
+    - { role: media, tags: ["media"] }
+    - { role: mpd, tags: ["mpd"] }
+    - { role: mpv, tags: ["mpv"] }
+    - { role: pianobar, tags: ["pianobar"] }
+    - { role: laptop, tags: ["laptop"] }
+    - {
+        role: thinkpad,
+        tags: ["thinkpad"],
+        when: "'ThinkPad' in ansible_product_version",
+      }
+    - { role: screensaver, tags: ["screensaver"] }
+    - { role: git-annex, tags: ["git-annex"], when: "gitannex is defined" }
+    - { role: taskwarrior, tags: ["taskwarrior"] }
+    - { role: cups, tags: ["cups"] }
+    - { role: pdf, tags: ["pdf"] }
+    - { role: git, tags: ["git"] }
+    - { role: virtualbox, tags: ["virtualbox"] }
+    - { role: sound, tags: ["sound"] }
+    - { role: radio, tags: ["radio"] }
+    - { role: calibre, tags: ["calibre"] }
+    - { role: parcimonie, tags: ["parcimonie"], when: "tor is defined" }
+    - { role: localtime, tags: ["localtime"], when: "localtime is defined" }
+    - { role: wormhole, tags: ["wormhole"] }
+    - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
+    - { role: hostsctl, tags: ["hostsctl"], when: "hostsctl is defined" }
+    - { role: development, tags: ["development"] }
+    - { role: mirrorlist, tags: ["mirrorlist"], when: "mirrorlist is defined" }
+    - { role: pkgfile, tags: ["pkgfile"], when: "pkgfile is defined" }
+    - { role: logitech, tags: ["logitech"] }
+  vars_prompt:
+    - name: user_password
+      prompt: "Enter desired user password"

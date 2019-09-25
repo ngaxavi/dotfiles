@@ -1,0 +1,8 @@
+---
+- name: Install tilix
+  aur:
+    name: tilix
+    user: { { user.name } }
+  tags:
+    - aur
+    - tilix

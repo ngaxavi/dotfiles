@@ -1,0 +1,20 @@
+---
+- name: Install hunspell
+  pacman:
+    name:
+      - hunspell
+      - hunspell-en_US
+      - hunspell-de_DE
+    state: present
+  tags:
+    - hunspell
+
+- name: Install aspell
+  pacman:
+    name:
+      - aspell
+      - aspell-en
+      - aspell-de
+    state: present
+  tags:
+    - aspell

@@ -1,0 +1,37 @@
+---
+- name: Install qemu + virt-manager + ebtables + dnsmasq + libvirt
+  pacman:
+    name:
+      - qemu
+      - virt-manager
+      - ebtables
+      - dnsmasq
+      - libvirt
+    state: present
+  tags:
+    - kvm
+
+- name: Start libvirtd service
+  systemd:
+    name: libvirtd
+    state: started
+  when: libvirt.enable == True
+  tags:
+    - kvm
+
+- name: enable libvirtd and ensure it is not masked
+  systemd:
+    name: libvirtd
+    enabled: yes
+    masked: no
+  when: libvirt.enable == True
+  tags:
+    - kvm
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ user.name }}"
+    groups: libvirt
+    append: yes
+  tags:
+    - kvm

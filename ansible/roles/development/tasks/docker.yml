@@ -1,0 +1,30 @@
+---
+- name: docker
+  pacman:
+    name: docker
+    state: present
+  tags:
+    - docker
+
+- name: Start docker service
+  systemd:
+    name: docker
+    state: started
+  tags:
+    - docker
+
+- name: enable docker and ensure it is not masked
+  systemd:
+    name: docker
+    enabled: yes
+    masked: no
+  tags:
+    - docker
+
+- name: Add user to docker group
+  user:
+    name: "{{ user.name }}"
+    groups: docker
+    append: yes
+  tags:
+    - docker

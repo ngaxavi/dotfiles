@@ -1,8 +1,8 @@
 # Path to Oh My Fish install.
-set -gx OMF_PATH "/home/{{username}}/.local/share/omf"
+set -gx OMF_PATH "/home/{{user.name}}/.local/share/omf"
 
 # Customize Oh My Fish configuration path.
-#set -gx OMF_CONFIG "/home/{{username}}/.config/omf"
+set -gx OMF_CONFIG "/home/{{user.name}}/.config/omf"
 
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
@@ -10,8 +10,14 @@ source $OMF_PATH/init.fish
 # Disable the Greeting message
 set -U fish_greeting
 
-#Eclipse
-set SWT_GTK3 0
+# Alias
+
 
 #NPM
 set -x PATH $PATH $HOME/.npm-global/bin
+
+# Base16 Shell
+if status --is-interactive
+    set BASE16_SHELL "$HOME/.config/base16-shell/"
+    source "$BASE16_SHELL/profile_helper.fish"
+end

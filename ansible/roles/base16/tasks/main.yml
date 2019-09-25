@@ -1,6 +1,20 @@
 ---
-  - name: Base 16 -  Checkout Repository
-    git: repo=https://github.com/aaron-williamson/base16-gnome-terminal.git dest=/home/{{ username }}/.config/base16-gnome-terminal
+- name: Base 16 gnome terminal
+  git:
+    repo: "https://github.com/aaron-williamson/base16-gnome-terminal.git"
+    dest: /home/{{ user.name }}/.config/base16-gnome-terminal
 
-  - name: Base16 - install default dark
-    shell: /home/{{username}}/.config/base16-gnome-terminal/color-scripts/base16-default-dark.sh
+- name: Base shell
+  git:
+    repo: "https://github.com/chriskempson/base16-shell.git"
+    dest: /home/{{ user.name }}/.config/base16-shell
+
+- name: Base16 - tilix
+  git:
+    repo: "https://github.com/karlding/base16-tilix.git"
+    dest: /home/{{ user.name }}/base16-tilix
+
+- name: Install base16 tilix
+  copy:
+    src: /home/{{ user.name }}/base16-tilix/tilix/
+    dest: /home/{{ user.name }}/.config/tilix/schemes

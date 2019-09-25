@@ -1,0 +1,16 @@
+---
+- name: Install fldigi
+  aur:
+    name:
+      - cty
+      - flxmlrpc
+      - fldigi
+      - flrig
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Install wsjtx
+  aur: name=wsjtx user={{ user.name }}
+  tags:
+    - aur

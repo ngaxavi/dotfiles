@@ -1,0 +1,53 @@
+---
+- include: docker.yml
+- include: kvm.yml
+
+- name: Install nodejs + npm + yarn
+  pacman:
+    name:
+      - nodejs
+      - yarn
+      - npm
+    state: present
+
+- name: Create NPM directory
+  file:
+    name: /home/{{ user.name }}/.npm-global
+    state: directory
+
+- name: Set NPM directory
+  command: npm config set prefix /home/{{ user.name }}/.npm-global
+
+- name: Write profile file
+  copy:
+    src: profile.j2
+    dest: /home/{{ user.name }}/.profile
+
+- name: Update bashrc
+  shell: . /home/{{ username }}/.profile
+
+- name: Installation DevTools
+  npm:
+    name: "{{ item }}"
+    state: present
+    global: yes
+  with_items:
+    - generator-jhipster
+    - yo
+    - "@angular/cli"
+    - "@nest/cli"
+
+- name: install javascript linters + helpers
+  npm:
+    name: "{{ item }}"
+    global: yes
+    state: present
+  with_items:
+    - eslint
+    - tslint
+    - prettier
+
+- name: Install development editor
+  aur:
+    name: google-chrome-stable
+    user: "{{ user.name }}"

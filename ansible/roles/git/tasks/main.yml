@@ -1,0 +1,15 @@
+---
+- name: Install git
+  pacman:
+    name: git
+
+- name: Setup default git configuraiton
+  git_config:
+    name: "{{ item.name }}"
+    scope: global
+    value: "{{ item.value }}"
+  with_items:
+    - { name: "user.name", value: "{{ user.real_name }}" }
+    - { name: "user.email", value: "{{ user.email }}" }
+    - { name: "ui.color", value: "True" }
+  when: user is defined
