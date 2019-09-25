@@ -17,10 +17,8 @@
     - { role: ssd, tags: ["ssd"] }
     - { role: fonts, tags: ["fonts"] }
     - { role: x, tags: ["x"] }
-    - { role: lightdm, tags: ["lightdm"], when: "display_manager == 'lightdm'" }
     - { role: gdm, tags: ["gdm"], when: "display_manager == 'gdm'" }
     - { role: gnome, tags: ["gnome"], when: "desktop_environment == 'gnome'" }
-    - { role: pass, tags: ["pass"] }
     - { role: iptables, tags: ["iptables"] }
     - { role: nettools, tags: ["nettools"] }
     - { role: networkmanager, tags: ["networkmanager"] }
@@ -55,14 +53,12 @@
     - { role: sound, tags: ["sound"] }
     - { role: radio, tags: ["radio"] }
     - { role: calibre, tags: ["calibre"] }
-    - { role: parcimonie, tags: ["parcimonie"], when: "tor is defined" }
     - { role: localtime, tags: ["localtime"], when: "localtime is defined" }
     - { role: wormhole, tags: ["wormhole"] }
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
     - { role: hostsctl, tags: ["hostsctl"], when: "hostsctl is defined" }
     - { role: development, tags: ["development"] }
     - { role: mirrorlist, tags: ["mirrorlist"], when: "mirrorlist is defined" }
-    - { role: pkgfile, tags: ["pkgfile"], when: "pkgfile is defined" }
     - { role: logitech, tags: ["logitech"] }
   vars_prompt:
     - name: user_password

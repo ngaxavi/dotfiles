@@ -2,7 +2,7 @@
 - name: Install tilix
   aur:
     name: tilix
-    user: { { user.name } }
+    user: "{{ user.name }}"
   tags:
     - aur
     - tilix

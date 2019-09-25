@@ -1,7 +1,7 @@
 user:
     name: ngansop
     uid: 1000
-    group: ngansop
+    group: wheel
     shell: /usr/bin/fish
     email:  ngaxavi@gmail.com
     log:

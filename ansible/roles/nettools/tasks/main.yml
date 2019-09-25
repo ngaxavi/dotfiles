@@ -50,7 +50,9 @@
     state: present
 
 - name: Install pdsh
-  aur: name=pdsh user={{ user.name }}
+  aur:
+    name: pdsh
+    user: "{{ user.name }}"
   tags:
     - aur
 

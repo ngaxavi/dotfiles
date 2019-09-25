@@ -11,6 +11,8 @@
     - aur
 
 - name: Install wsjtx
-  aur: name=wsjtx user={{ user.name }}
+  aur:
+    name: wsjtx
+    user: "{{ user.name }}"
   tags:
     - aur

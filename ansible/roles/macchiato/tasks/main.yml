@@ -1,6 +1,8 @@
 ---
 - name: Install macchiato
-  aur: name=macchiato-git user={{ user.name }}
+  aur:
+    name: macchiato-git
+    user: "{{ user.name }}"
   tags:
     - aur
 

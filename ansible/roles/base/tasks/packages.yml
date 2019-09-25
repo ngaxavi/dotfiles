@@ -23,8 +23,8 @@
   file:
     path: /home/{{ user.name }}/{{ aur.dir }}
     state: directory
-    owner: { { user.name } }
-    group: { { user.group } }
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
   tags:
     - aur
     - packages

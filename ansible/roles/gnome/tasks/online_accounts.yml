@@ -1,5 +1,5 @@
 ---
 - name: Configuring GNOME Online Accounts integration
-  pacman: 
+  pacman:
     name: gvfs-goa
-    state: {{ "present" if gnome.online_accounts_support else "absent" }}
+    state: present

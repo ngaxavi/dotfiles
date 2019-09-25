@@ -54,7 +54,7 @@
 - name: Install geteltorito
   aur:
     name: geteltorito
-    user: { { user.name } }
+    user: "{{ user.name }}"
   tags:
     - aur
     - geteltorito

@@ -2,7 +2,7 @@
 - name: Install srandrd
   aur:
     name: srandrd
-    user: { { user.name } }
+    user: "{{ user.name }}"
   tags:
     - aur
     - srandrd

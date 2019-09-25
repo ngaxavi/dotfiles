@@ -18,7 +18,9 @@
     - beets
 
 - name: Install mp3val
-  aur: name=mp3val user={{ user.name }}
+  aur:
+    name: mp3val
+    user: "{{ user.name }}"
   tags:
     - aur
     - beets

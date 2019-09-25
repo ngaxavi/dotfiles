@@ -2,7 +2,7 @@
 - name: Disabling GNOME Shell top left hot corner
   aur:
     name: gnome-shell-extension-no-topleft-hot-corner
-    user: { { user.name } }
+    user: "{{ user.name }}"
   when: "gnome.gnome_shell.disable_top_left_hot_corner"
   tags:
     - aur
