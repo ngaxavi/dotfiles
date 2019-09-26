@@ -22,11 +22,22 @@
     src: config.j2
     dest: /home/{{ user.name }}/.config/fish/config.fish
 
-- name: use oh-my-fish
-  shell: |
-    curl -L https://get.oh-my.fish > install
-    fish install --path=/home/{{ user.name }}/.local/share/omf --config=/home/{{ user.name }}/.config/omf
-    exit 0
+- name: Check if oh-my-fish is installed
+  stat:
+    path: "/etc/omf.installed"
+  register: omf
+
+- name: Clone oh-my-fish repo
+  git:
+    repo: "https://github.com/oh-my-fish/oh-my-fish"
+    dest: "/tmp/omf"
+    clone: yes
+  when: not omf.stat.exists
+
+- name: Install oh-my-fish
+  become_user: "{{ user.name }}"
+  command: /tmp/omf/bin/install -y --offline --noninteractive
+  when: not omf.stat.exists
 
 - name: Copy fish helper
   template:
@@ -43,6 +54,11 @@
     dest: /home/{{ user.name }}/.config/fish/functions/{{ item }}.fish
   with_items:
     - reload
+
+- name: Mark oh-my-fish installed with /etc/omf.installed
+  file:
+    path: /etc/omf.installed
+    state: touch
 
 - name: Install pure theme
   shell: |
