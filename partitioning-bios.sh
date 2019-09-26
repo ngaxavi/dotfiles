@@ -40,6 +40,8 @@ cat /mnt/etc/fstab
 wget https://raw.githubusercontent.com/ngaxavi/dotfiles/master/base-setup-bios.sh /mnt/base-setup-bios.sh
 chmod +x /mnt/base-setup-bios.sh
 
+arch-chroot /mnt /bin/bash
+
 # reboot
 umount -R /mnt
 reboot
