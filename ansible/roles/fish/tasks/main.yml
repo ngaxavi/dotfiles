@@ -22,22 +22,22 @@
     src: config.j2
     dest: /home/{{ user.name }}/.config/fish/config.fish
 
-- name: Check if oh-my-fish is installed
-  stat:
-    path: "/etc/omf.installed"
-  register: omf
+# - name: Check if oh-my-fish is installed
+#   stat:
+#     path: "/etc/omf.installed"
+#   register: omf
 
-- name: Clone oh-my-fish repo
-  git:
-    repo: "https://github.com/oh-my-fish/oh-my-fish"
-    dest: "/tmp/omf"
-    clone: yes
-  when: not omf.stat.exists
+# - name: Clone oh-my-fish repo
+#   git:
+#     repo: "https://github.com/oh-my-fish/oh-my-fish"
+#     dest: "/tmp/omf"
+#     clone: yes
+#   when: not omf.stat.exists
 
-- name: Install oh-my-fish
-  become_user: "{{ user.name }}"
-  command: /tmp/omf/bin/install -y --offline --noninteractive
-  when: not omf.stat.exists
+# - name: Install oh-my-fish
+#   become_user: "{{ user.name }}"
+#   command: /tmp/omf/bin/install -y --offline --noninteractive
+#   when: not omf.stat.exists
 
 - name: Copy fish helper
   template:
@@ -59,10 +59,9 @@
   file:
     path: /etc/omf.installed
     state: touch
-
-- name: Install pure theme
-  shell: |
-    omf install pure
-    ln -s $OMF_PATH/themes/pure/conf.d/pure.fish ~/.config/fish/conf.d/pure.fish
-    ln -s $OMF_PATH/themes/pure/conf.d/_pure_init.fish ~/.config/fish/conf.d/pure_init.fish
-    exit 0
+# - name: Install pure theme
+#   shell: |
+#     omf install pure
+#     ln -s $OMF_PATH/themes/pure/conf.d/pure.fish ~/.config/fish/conf.d/pure.fish
+#     ln -s $OMF_PATH/themes/pure/conf.d/_pure_init.fish ~/.config/fish/conf.d/pure_init.fish
+#     exit 0

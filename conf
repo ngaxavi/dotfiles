@@ -20,6 +20,31 @@ aur:
     packages:
         - yay
         - downgrade
+        - jdk9
+        - jdk12
+        - jdk
+        - goland
+        - paper-gtk-theme-git
+        - paper-icon-theme-git
+        - flattr-icon-theme
+        - gtk-theme-arc-flatabulous-git
+        - flat-remix-git
+        - system-san-francisco-font-git
+        - intellij-idea-ultimate-edition
+        - webstorm
+        - visual-studio-code-bin
+        - gtk-arc-flatabulous-theme-git
+        - gitkraken
+        - dbeaver
+        - go-for-it
+        - teamviewer
+        - dropbox
+        - mongodb-compass
+        - tilix
+        - google-chrome
+        - typora
+        - rke-bin
+        - skaffold
 
 ssh:
     port: 22
@@ -32,6 +57,9 @@ gnupg:
 
 editors:
     - gedit
+    - gnome-latex
+    - texlive-most
+    - texlive-lang
 
 video_drivers:
     - libva-intel-driver
@@ -48,6 +76,7 @@ base_packages:
     - moreutils
     - dateutils
     - bc
+    - rabbitmq
     - ranger
     - strace
     - lsof
@@ -68,6 +97,8 @@ base_packages:
     - termdown
     - fzf
     - smartmontools
+    - nasm
+    - vlc
 
 filesystem_packages:
     - dosfstools
