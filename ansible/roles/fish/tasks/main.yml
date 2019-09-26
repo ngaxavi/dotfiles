@@ -54,11 +54,10 @@
     dest: /home/{{ user.name }}/.config/fish/functions/{{ item }}.fish
   with_items:
     - reload
-
-- name: Mark oh-my-fish installed with /etc/omf.installed
-  file:
-    path: /etc/omf.installed
-    state: touch
+# - name: Mark oh-my-fish installed with /etc/omf.installed
+#   file:
+#     path: /etc/omf.installed
+#     state: touch
 # - name: Install pure theme
 #   shell: |
 #     omf install pure

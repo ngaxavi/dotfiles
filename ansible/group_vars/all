@@ -30,12 +30,18 @@ gnupg:
     enable_agent: True
     emulate_ssh: True
 
+network:
+    spoof_mac: True
+    conn_check:
+        interval: 0
 
 editors:
     - gedit
 
 video_drivers:
-    - libva-intel-driver
+    - xf86-video-radeonhd
+    - xf86-video-ati
+    - xf86-video-amdgpu 
 
 base_packages:
     - base-devel

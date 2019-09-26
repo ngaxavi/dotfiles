@@ -31,13 +31,13 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
 
 # Install base system
-pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub ansible bash-completion
+pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub ansible bash-completion wget
 
 # Generate and verify fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
-wget https://raw.githubusercontent.com/ngaxavi/dotfiles/master/base-setup-bios.sh /mnt/base-setup-bios.sh
+wget -P /mnt https://raw.githubusercontent.com/ngaxavi/dotfiles/master/base-setup-bios.sh
 chmod +x /mnt/base-setup-bios.sh
 
 arch-chroot /mnt /bin/bash

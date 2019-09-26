@@ -5,7 +5,10 @@
       - gnome
       - gnome-extra
       - gnome-tweaks
-      - xorg-server-xwayland
+      - xorg-server
+      - xorg-xinit
+      - xorg-utils
+      - xorg-server-utils
     state: present
 
 - include: dconf.yml
