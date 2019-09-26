@@ -3,8 +3,8 @@
   pacman:
     name:
       - hunspell
-      - hunspell-en_US
-      - hunspell-de_DE
+      - hunspell-en # remove it
+      - hunspell-de
     state: present
   tags:
     - hunspell

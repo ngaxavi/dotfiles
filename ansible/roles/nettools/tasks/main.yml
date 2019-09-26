@@ -58,7 +58,8 @@
 
 - name: Install wireshark
   pacman:
-    name: wireshark-qt state=present
+    name: wireshark-qt
+    state: present
 
 - name: Add user to wireshark group
   user:

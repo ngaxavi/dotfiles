@@ -1,5 +1,6 @@
 user:
     name: ngansop
+    real_name: Xavier Ngansop
     uid: 1000
     group: ngansop
     shell: /usr/bin/fish
@@ -11,7 +12,7 @@ user:
 hostname: xlabs
 
 dotfiles:
-    url: git@github.com:ngaxavi/dotfiles.git
+    url: https://github.com/ngaxavi/dotfiles.git
     destination: projects/dotfiles
     rcup_flags: -fx README.md
 
@@ -154,6 +155,8 @@ gdm:
     touchpad:
         tap_to_click: True
     accessibility_menu: True
+
+desktop_environment: gnome
 
 gnome:
     night_light:

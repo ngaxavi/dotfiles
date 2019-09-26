@@ -34,9 +34,8 @@
 
 - name: Install Google Chrome
   aur:
-    name: google-chrome-stable
+    name: google-chrome
     user: "{{ user.name }}"
-    skip_pgp: yes
   tags:
     - chrome
 
