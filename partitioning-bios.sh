@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -z "$1" ]
+then
+      SWAP="8G"
+else
+      SWAP=$1
+fi
+
 # create a single partition for LUKS
 parted -s /dev/sda mklabel msdos
 parted -s /dev/sda mkpart primary 2048s 100%
@@ -9,13 +16,13 @@ cryptsetup luksFormat --type luks1 /dev/sda1
 cryptsetup luksOpen /dev/sda1 lvm
 pvcreate /dev/mapper/lvm
 vgcreate arch /dev/mapper/lvm
-lvcreate -L 8G arch -n swap
-lvcreate -L 5G arch -n data
+lvcreate -L $SWAP arch -n swap
+[ ! -z "$2" ] && lvcreate -L $2 arch -n data
 lvcreate -l +100%FREE arch -n root
 lvdisplay
 mkswap -L swap /dev/mapper/arch-swap
 mkfs.ext4 /dev/mapper/arch-root
-mkfs.ntfs /dev/mapper/arch-data
+[ ! -z "$2" ] &&  mkfs.ntfs /dev/mapper/arch-data
 mount /dev/mapper/arch-root /mnt
 swapon /dev/mapper/arch-swap
 
