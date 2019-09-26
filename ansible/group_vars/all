@@ -99,7 +99,6 @@ base_packages:
     - smartmontools
     - nasm
     - vlc
-    - vulkan-radeon
 
 filesystem_packages:
     - dosfstools
@@ -115,8 +114,6 @@ browser_choices:
     - google-chrome -P work
     - firefox
     - firefox
-    - firewarden chromium
-    - firewarden -c qutebrowser
     - tor-browser-en
     - play
     - qcode
@@ -124,13 +121,6 @@ browser_choices:
 
 passwordless_sudo:
     - /usr/bin/openvpn*
-
-tarsnapper:
-  deltas: 1h 1d 7d 30d 365d
-  period: DAILY
-  ac_only: True
-  run_on: trusted
-  random_delay: 600
 
 gitannex:
     stop_on_untrusted: True
@@ -171,37 +161,6 @@ firejail:
         - ~/.vdirsyncer
         - ~/library
 
-cryptshot:
-    - name: alta
-      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
-      keyfile: /home/ngansop/.keys/usb-alta.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: bishorn
-      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
-      keyfile: /home/ngansop/.keys/usb-bishorn.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: pilchuck
-      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
-      keyfile: /home/ngansop/.keys/usb-pilchuck.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
 
 journal:
     max_size: 500M
@@ -213,23 +172,12 @@ udisks:
 hostsctl:
     url: https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
-himawaripy:
-    run_time: 15min
-    run_boot_delay: 2min
-    run_on: never
-    flags: --auto-offset --level 4
-
-goesimage:
-    run_time: 15min
-    run_boot_delay: 2min
-    run_on: trusted
-    flags: -w -e
 
 libinput:
     middle_click_scroll: 12
     button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"
 
-display_manager: lightdm
+display_manager: gdm
 gdm:
     sound: False
     font_scaling_factor: 1
@@ -238,7 +186,6 @@ gdm:
         tap_to_click: True
     accessibility_menu: True
 
-desktop_environment: i3
 gnome:
     night_light:
         enabled: True
@@ -307,9 +254,6 @@ aur_fonts:
 
 
 mirrorlist:
-    run_on: trusted
-
-units:
     run_on: trusted
 
 pkgfile:
