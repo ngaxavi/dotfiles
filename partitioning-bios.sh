@@ -52,7 +52,7 @@ explain "Install base system"
 tell pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub ansible bash-completion wget
 
 explain "Generate and verify fstab"
-tell genfstab -U -p /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 tell cat /mnt/etc/fstab
 
 explain "Download Config for Arch chroot"

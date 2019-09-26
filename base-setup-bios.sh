@@ -34,7 +34,7 @@ tell systemctl enable dhcpcd.service
 tell passwd
 
 explain "Set your mkinitcpio encrypt/lvm2 hooks and rebuild."
-tell sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
 tell mkinitcpio -p linux
 
 explain "Add a keyfile to decrypt the root volume and properly set the hooks"
@@ -46,8 +46,8 @@ tell mkinitcpio -p linux
 
 explain "Configure GRUB and Set the UUID of the encrypted root device"
 echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
-tell ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
-tell sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
+ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
+sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
 tell grub-install /dev/sda
 tell grub-mkconfig -o /boot/grub/grub.cfg
 tell chmod -R g-rwx,o-rwx /boot
