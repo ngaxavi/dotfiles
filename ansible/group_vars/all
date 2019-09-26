@@ -164,6 +164,9 @@ gdm:
 
 desktop_environment: gnome
 
+libvirt:
+    enable: False
+
 gnome:
     night_light:
         enabled: True
@@ -230,9 +233,6 @@ aur_fonts:
     - ttf-google-fonts
     - ttf-font-awesome
 
-
-mirrorlist:
-    run_on: trusted
 
 pkgfile:
     run_on: trusted

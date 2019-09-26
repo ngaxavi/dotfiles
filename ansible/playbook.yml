@@ -37,7 +37,7 @@
     - { role: mpd, tags: ["mpd"] }
     - { role: mpv, tags: ["mpv"] }
     - { role: pianobar, tags: ["pianobar"] }
-    - { role: laptop, tags: ["laptop"] }
+    - { role: laptop, tags: ["laptop"], when: "laptop is defined" }
     - {
         role: thinkpad,
         tags: ["thinkpad"],
@@ -51,14 +51,12 @@
     - { role: git, tags: ["git"] }
     - { role: virtualbox, tags: ["virtualbox"] }
     - { role: sound, tags: ["sound"] }
-    - { role: radio, tags: ["radio"] }
     - { role: calibre, tags: ["calibre"] }
     - { role: localtime, tags: ["localtime"], when: "localtime is defined" }
     - { role: wormhole, tags: ["wormhole"] }
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
     - { role: hostsctl, tags: ["hostsctl"], when: "hostsctl is defined" }
     - { role: development, tags: ["development"] }
-    - { role: mirrorlist, tags: ["mirrorlist"], when: "mirrorlist is defined" }
     - { role: logitech, tags: ["logitech"] }
   vars_prompt:
     - name: user_password

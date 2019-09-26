@@ -69,4 +69,3 @@
 - include: srandrd.yml
 - include: tilix.yml
 - include: autocutsel.yml
-- include: xdg.yml

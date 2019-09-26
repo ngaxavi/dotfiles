@@ -24,7 +24,7 @@
     dest: /home/{{ user.name }}/.profile
 
 - name: Update bashrc
-  shell: . /home/{{ username }}/.profile
+  shell: . /home/{{ user.name }}/.profile
 
 - name: Installation DevTools
   npm:
@@ -49,5 +49,5 @@
 
 - name: Install development editor
   aur:
-    name: google-chrome-stable
+    name: google-chrome-
     user: "{{ user.name }}"

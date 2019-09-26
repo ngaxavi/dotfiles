@@ -1,42 +1,56 @@
 #!/bin/bash
+tell() {
+  echo -e "\033[0;33m|-- ${*}\033[0m"
+  $* || {
+    echo -e "\033[0;31mFail !\033[0m" 1>&2 ;
+    exit 1 ;
+  }
+}
 
-export LANG=de_DE.UTF-8
-echo $LANG UTF-8 >> /etc/locale.gen
-echo de_DE ISO-8859-1 >> /etc/locale.gen
-echo de_DE@euro ISO-8859-15 >> /etc/locale.gen
-echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
-locale-gen
-echo LANG=$LANG > /etc/locale.conf
-echo LC_TIME=$LANG >> /etc/locale.conf
-echo LC_COLLATE=C >> /etc/locale.conf
-echo LANGUAGE=de_DE >> /etc/locale.conf
-echo KEYMAP=de-latin1 > /etc/vconsole.conf
-ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-hwclock --systohc
-echo dev-monster > /etc/hostname
-systemctl enable dhcpcd.service
-passwd
+explain() {
+  echo -e "\033[0;34m${1}\033[0m"
+}
 
-# Set your mkinitcpio encrypt/lvm2 hooks and rebuild.
-sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
-mkinitcpio -p linux
+success() {
+  echo -e "\033[0;32m${1}\033[0m"
+}
 
-#  Add a keyfile to decrypt the root volume and properly set the hooks
-dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
-cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
-chmod 000 /crypto_keyfile.bin
-sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
-mkinitcpio -p linux
+explain "Configuration System"
+tell export LANG=de_DE.UTF-8
+tell echo $LANG UTF-8 >> /etc/locale.gen
+tell echo de_DE ISO-8859-1 >> /etc/locale.gen
+tell echo de_DE@euro ISO-8859-15 >> /etc/locale.gen
+tell echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+tell locale-gen
+tell echo LANG=$LANG > /etc/locale.conf
+tell echo LC_TIME=$LANG >> /etc/locale.conf
+tell echo LC_COLLATE=C >> /etc/locale.conf
+tell echo LANGUAGE=de_DE >> /etc/locale.conf
+tell echo KEYMAP=de-latin1 > /etc/vconsole.conf
+tell ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+tell hwclock --systohc
+tell echo dev-monster > /etc/hostname
+tell systemctl enable dhcpcd.service
+tell passwd
 
-# Configure GRUB
-echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
+explain "Set your mkinitcpio encrypt/lvm2 hooks and rebuild."
+tell sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
+tell mkinitcpio -p linux
 
-# BIOS mode - set the UUID of the encrypted root device
-ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
-sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
-grub-install /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
-chmod -R g-rwx,o-rwx /boot
+explain "Add a keyfile to decrypt the root volume and properly set the hooks"
+tell dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
+tell cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
+tell chmod 000 /crypto_keyfile.bin
+tell sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
+tell mkinitcpio -p linux
 
-# Cleanup and reboot
-exit
+explain "Configure GRUB and Set the UUID of the encrypted root device"
+tell echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
+tell ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
+tell sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
+tell grub-install /dev/sda
+tell grub-mkconfig -o /boot/grub/grub.cfg
+tell chmod -R g-rwx,o-rwx /boot
+
+explain "Exit"
+tell exit
