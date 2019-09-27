@@ -36,3 +36,6 @@ explain "Install keyboard"
 tell pacman -S xf86-input-synaptics --noconfirm --needed
 tell localectl set-x11-keymap de pc105 de_nodeadkeys
 
+explain "Reboot"
+tell reboot
+

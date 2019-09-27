@@ -52,5 +52,9 @@ tell grub-install /dev/sda
 tell grub-mkconfig -o /boot/grub/grub.cfg
 tell chmod -R g-rwx,o-rwx /boot
 
+explain "Download user config"
+tell wget -P /mnt https://raw.githubusercontent.com/ngaxavi/dotfiles/master/add-user.sh
+tell chmod +x add-user.sh
+
 explain "Exit"
 tell exit
