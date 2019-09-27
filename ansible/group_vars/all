@@ -1,13 +1,7 @@
 user:
     name: ngansop
     real_name: Xavier Ngansop
-    uid: 1000
-    group: ngansop
-    shell: /usr/bin/fish
     email:  ngaxavi@gmail.com
-    log:
-        dir: log
-        rotate: 8
 
 hostname: xlabs
 
