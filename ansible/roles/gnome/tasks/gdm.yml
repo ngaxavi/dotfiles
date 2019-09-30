@@ -1,0 +1,10 @@
+---
+- name: Install GNOME Display Manager (GDM)
+  pacman:
+    name: gdm
+    state: present
+
+- name: Enable GDM
+  service:
+    name: gdm.service
+    enabled: yes

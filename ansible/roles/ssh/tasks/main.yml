@@ -12,6 +12,7 @@
     dest: /etc/ssh/sshd_config
 
 - name: Create OpenSSH systemd unit file directory
+  become: yes
   file:
     path: /etc/systemd/system/sshd.socket.d
     state: directory

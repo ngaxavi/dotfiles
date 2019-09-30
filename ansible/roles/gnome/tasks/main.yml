@@ -11,4 +11,5 @@
 - include: dconf.yml
 - include: gtk.yml
 - include: gnome_shell.yml
+- include: gdm.yml
 - include: online_accounts.yml

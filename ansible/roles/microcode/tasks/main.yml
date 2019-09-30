@@ -1,5 +1,6 @@
 ---
 - name: Install amd microcode
+  become: yes
   pacman:
     name: amd-ucode
     state: present

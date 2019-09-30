@@ -44,7 +44,7 @@
     src: "{{ item }}.j2"
     dest: /home/{{ user.name }}/.config/fish/{{ item }}
     owner: "{{ user.name }}"
-    group: "{{ user.name }}"
+    group: "{{ user.group }}"
   with_items:
     - aliases.fish
 

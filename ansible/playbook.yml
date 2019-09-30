@@ -53,5 +53,8 @@
     - { role: development, tags: ["development"] }
     - { role: logitech, tags: ["logitech"] }
   vars_prompt:
-    - name: user_password
-      prompt: "Enter desired user password"
+    - name: user_real_name
+      prompt: "Please enter your real name"
+
+    - name: user_email
+      prompt: "Please give your email"

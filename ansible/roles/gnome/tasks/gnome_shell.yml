@@ -9,12 +9,14 @@
     - aur
 
 - name: Enabling GNOME Shell top left hot corner
+  become: yes
   pacman:
     name: gnome-shell-extension-no-topleft-hot-corner
     state: absent
   when: "not gnome.gnome_shell.disable_top_left_hot_corner"
 
 - name: Configuring GNOME Shell Extensions support
+  become: yes
   pacman:
     name:
       - gnome-shell-extensions

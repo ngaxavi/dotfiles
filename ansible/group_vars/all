@@ -1,15 +1,8 @@
 user:
     group: users
+    uid: 1000
     name: ngansop
-    real_name: Xavier Ngansop
-    email:  ngaxavi@gmail.com
 
-hostname: xlabs
-
-dotfiles:
-    url: https://github.com/ngaxavi/dotfiles.git
-    destination: projects/dotfiles
-    rcup_flags: -fx README.md
 
 aur:
     dir: aur
@@ -34,7 +27,6 @@ editors:
     - gedit
 
 video_drivers:
-    - xf86-video-radeonhd
     - xf86-video-ati
     - xf86-video-amdgpu 
 
@@ -97,8 +89,6 @@ gitannex:
     stop_on_untrusted: True
 
 
-bootloader: grub
-
 fingerprint: False
 
 etesync: False
@@ -147,15 +137,6 @@ hostsctl:
 libinput:
     middle_click_scroll: 12
     button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"
-
-display_manager: gdm
-gdm:
-    sound: False
-    font_scaling_factor: 1
-    logo_path: False
-    touchpad:
-        tap_to_click: True
-    accessibility_menu: True
 
 desktop_environment: gnome
 
@@ -228,8 +209,5 @@ aur_fonts:
     - ttf-google-fonts
     - ttf-font-awesome
 
-
-pkgfile:
-    run_on: trusted
 
 kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"
