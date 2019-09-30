@@ -64,7 +64,6 @@
     - libinput
 
 - include: sxhkd.yml
-- include: unclutter.yml
 - include: autorandr.yml
 - include: srandrd.yml
 - include: tilix.yml

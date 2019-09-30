@@ -24,6 +24,8 @@
     state: present
 
 - name: Install pulseaudio-ctl
-  aur: name=pulseaudio-ctl user={{ user.name }}
+  aur:
+    name: pulseaudio-ctl
+    user: "{{ user.name }}"
   tags:
     - aur

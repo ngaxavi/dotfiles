@@ -1,7 +1,7 @@
 #!/bin/bash
 tell() {
   echo -e "\033[0;33m|-- ${*}\033[0m"
-  $* || {
+  "$@" || {
     echo -e "\033[0;31mFail !\033[0m" 1>&2 ;
     exit 1 ;
   }
@@ -47,7 +47,7 @@ tell mkinitcpio -p linux
 explain "Configure GRUB and Set the UUID of the encrypted root device"
 echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
 ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
-sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
+sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=$ROOTUUID:lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
 tell grub-install /dev/sda
 tell grub-mkconfig -o /boot/grub/grub.cfg
 tell chmod -R g-rwx,o-rwx /boot

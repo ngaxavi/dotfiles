@@ -13,12 +13,10 @@
     - { role: fish, tags: ["fish"] }
     - { role: hardened, tags: ["hardened"] }
     - { role: ssh, tags: ["ssh"] }
-    - { role: dotfiles, tags: ["dotfiles"] }
-    - { role: ssd, tags: ["ssd"] }
+    - { role: ssd, tags: ["ssd"], when: "laptop is defined" }
     - { role: fonts, tags: ["fonts"] }
     - { role: x, tags: ["x"] }
-    - { role: gdm, tags: ["gdm"], when: "display_manager == 'gdm'" }
-    - { role: gnome, tags: ["gnome"], when: "desktop_environment == 'gnome'" }
+    - { role: gnome, tags: ["gnome"] }
     - { role: iptables, tags: ["iptables"] }
     - { role: nettools, tags: ["nettools"] }
     - { role: networkmanager, tags: ["networkmanager"] }
@@ -34,8 +32,6 @@
     - { role: spell, tags: ["spell"] }
     - { role: browsers, tags: ["browsers"] }
     - { role: media, tags: ["media"] }
-    - { role: mpd, tags: ["mpd"] }
-    - { role: mpv, tags: ["mpv"] }
     - { role: pianobar, tags: ["pianobar"] }
     - { role: laptop, tags: ["laptop"], when: "laptop is defined" }
     - {
@@ -44,7 +40,6 @@
         when: "'ThinkPad' in ansible_product_version",
       }
     - { role: screensaver, tags: ["screensaver"] }
-    - { role: git-annex, tags: ["git-annex"], when: "gitannex is defined" }
     - { role: taskwarrior, tags: ["taskwarrior"] }
     - { role: cups, tags: ["cups"] }
     - { role: pdf, tags: ["pdf"] }

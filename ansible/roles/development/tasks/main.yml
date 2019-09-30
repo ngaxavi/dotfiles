@@ -37,17 +37,12 @@
     - "@angular/cli"
     - "@nest/cli"
 
-- name: install javascript linters + helpers
-  npm:
-    name: "{{ item }}"
-    global: yes
-    state: present
-  with_items:
-    - eslint
-    - tslint
-    - prettier
 
 - name: Install development editor
   aur:
-    name: google-chrome-
+    name:
+      - webstorm
+      - intellij-idea-ultimate-edition
+      - goland
+      - visual-studio-code-bin
     user: "{{ user.name }}"

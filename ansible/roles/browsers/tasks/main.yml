@@ -42,7 +42,7 @@
 - name: Jail Chrome
   file:
     src: /usr/bin/firejail
-    dest: /usr/local/bin/chromium
+    dest: /usr/local/bin/chrome
     state: link
   tags:
     - chrome

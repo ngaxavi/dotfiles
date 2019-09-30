@@ -5,7 +5,9 @@
     state: present
 
 - name: Install firewarden
-  aur: name=firewarden user={{ user.name }}
+  aur:
+    name: firewarden
+    user: "{{ user.name }}"
   tags:
     - aur
 

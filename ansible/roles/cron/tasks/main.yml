@@ -9,3 +9,31 @@
     name: cronie.service
     enabled: yes
     state: started
+
+- name: Install acpid
+  pacman:
+    name: acpid
+    state: present
+
+- name: Enable acpid
+  service:
+    name: acpid.service
+    enabled: yes
+    state: started
+
+
+- name: Install avahi
+  pacman:
+    name: avahi
+    state: present
+
+- name: Enable avahi daemon
+  service:
+    name: avahi-daemon
+    enabled: yes
+    state: started
+
+- name: Install dbus
+  pacman:
+    name: dbus
+    state: present

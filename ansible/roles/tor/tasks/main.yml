@@ -14,7 +14,9 @@
     line: "User tor"
 
 - name: Create Tor systemd unit file directory
-  file: path=/etc/systemd/system/tor.service.d state=directory
+  file:
+    path: /etc/systemd/system/tor.service.d
+    state: directory
   tags:
     - firejail
 
@@ -28,7 +30,9 @@
     - firejail
 
 - name: Verify Tor firejail local profile exists
-  file: path=/etc/firejail/tor.local state=touch
+  file:
+    path: /etc/firejail/tor.local
+    state: touch
   tags:
     - firejail
 

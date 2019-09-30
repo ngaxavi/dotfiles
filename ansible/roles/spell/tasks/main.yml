@@ -1,12 +1,4 @@
 ---
-- name: Install hunspell
-  pacman:
-    name:
-      - hunspell
-    state: present
-  tags:
-    - hunspell
-
 - name: Install aspell
   pacman:
     name:

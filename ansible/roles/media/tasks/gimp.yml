@@ -1,6 +1,8 @@
 ---
 - name: Install poppler-glib
-  pacman: name=poppler-glib state=present
+  pacman:
+    name: poppler-glib
+    state: present
   tags:
     - gimp
 
@@ -22,6 +24,8 @@
     - firejail
 
 - name: Install GIMP raw support
-  pacman: name=gimp-nufraw state=present
+  pacman:
+    name: gimp-nufraw
+    state: present
   tags:
     - gimp

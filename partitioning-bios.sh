@@ -2,7 +2,7 @@
 
 tell() {
   echo -e "\033[0;33m|-- ${*}\033[0m"
-  $* || {
+  "$@" || {
     echo -e "\033[0;31mFail !\033[0m" 1>&2 ;
     exit 1 ;
   }
@@ -34,13 +34,13 @@ tell cryptsetup luksFormat --type luks1 /dev/sda1
 tell cryptsetup luksOpen /dev/sda1 lvm
 tell pvcreate /dev/mapper/lvm
 tell vgcreate arch /dev/mapper/lvm
-tell lvcreate -L $SWAP arch -n swap
-[ ! -z "$2" ] && tell lvcreate -L $2 arch -n data
+tell lvcreate -L "$SWAP" arch -n swap
+[ -n "$2" ] && tell lvcreate -L "$2" arch -n data
 tell lvcreate -l +100%FREE arch -n root
 tell lvdisplay
 tell mkswap -L swap /dev/mapper/arch-swap
 tell mkfs.ext4 /dev/mapper/arch-root
-[ ! -z "$2" ] &&  tell mkfs.ntfs /dev/mapper/arch-data
+[ -n  "$2" ] &&  tell mkfs.ntfs /dev/mapper/arch-data
 tell mount /dev/mapper/arch-root /mnt
 tell swapon /dev/mapper/arch-swap
 

@@ -3,3 +3,13 @@
   service:
     name: cronie.service
     state: restarted
+
+- name: restart acpid
+  service:
+    name: acpid
+    state: restarted
+
+- name: restart avahi-daemon
+  service:
+    name: avahi-daemon
+    state: restarted
