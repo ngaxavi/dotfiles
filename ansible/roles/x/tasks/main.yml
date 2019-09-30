@@ -74,6 +74,15 @@
   tags:
     - libinput
 
+- name: Map keyboard
+  become: yes
+  template:
+    src: 20-keyboard.conf
+    dest:  /etc/X11/xorg.conf.d/20-keyboard.conf
+  when: libinput.keyboard == True
+  tags:
+    - libinput
+
 - include: sxhkd.yml
 - include: autorandr.yml
 - include: srandrd.yml

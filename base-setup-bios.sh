@@ -26,10 +26,11 @@ echo LANG=$LANG > /etc/locale.conf
 echo LC_TIME=$LANG >> /etc/locale.conf
 echo LC_COLLATE=C >> /etc/locale.conf
 echo LANGUAGE=de_DE >> /etc/locale.conf
-echo KEYMAP=de-latin1 > /etc/vconsole.conf
-tell ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+echo KEYMAP=de-latin1-nodeadkeys > /etc/vconsole.conf
+tell ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 tell hwclock --systohc
-echo dev-monster > /etc/hostname
+tell timedatectl set-local-rtc 0
+echo devLabs > /etc/hostname
 tell systemctl enable dhcpcd.service
 tell passwd
 
