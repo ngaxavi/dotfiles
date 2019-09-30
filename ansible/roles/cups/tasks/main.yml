@@ -1,5 +1,6 @@
 ---
 - name: Install CUPS and drivers
+  become: yes
   pacman:
     name:
       - ghostscript
@@ -17,6 +18,7 @@
     state: present
 
 - name: Allow the print admin group to administer CUPS
+  become: yes
   lineinfile:
     dest: /etc/cups/cups-files.conf
     regexp: "^SystemGroup"
@@ -34,6 +36,7 @@
     - user
 
 - name: Enable and start CUPS
+  become: yes
   service:
     name: org.cups.cupsd.service
     enabled: yes

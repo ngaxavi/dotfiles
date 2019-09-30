@@ -1,5 +1,6 @@
 ---
 - name: Create journal config directory
+  become: yes
   file:
     path: /etc/systemd/journald.conf.d
     state: directory
@@ -7,6 +8,7 @@
     - journal
 
 - name: Push journal max size config
+  become: yes
   template:
     src: 00-journal-size.conf.j2
     dest: /etc/systemd/journald.conf.d/00-journal-size.conf

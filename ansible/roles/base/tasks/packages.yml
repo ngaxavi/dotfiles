@@ -1,5 +1,6 @@
 ---
 - name: Install universal base packages
+  become: yes
   pacman:
     name: "{{ base_packages }}"
     state: present

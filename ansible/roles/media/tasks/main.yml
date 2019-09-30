@@ -5,6 +5,7 @@
 - include: imv.yml
 
 - name: Install misc media codecs and helpers
+  become: yes
   pacman:
     name:
       - flac
@@ -26,21 +27,25 @@
     - mat
 
 - name: Install youtube-dl
+  become: yes
   pacman:
     name: youtube-dl
     state: present
 
 - name: Install zbar
+  become: yes
   pacman:
     name: zbar
     state: present
 
 - name: Install sxiv
+  become: yes
   pacman:
     name: sxiv
     state: present
 
 - name: Install svgcleaner
+  become: yes
   pacman:
     name: svgcleaner
     state: present

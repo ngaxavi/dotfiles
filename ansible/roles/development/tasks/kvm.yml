@@ -1,5 +1,6 @@
 ---
 - name: Install qemu + virt-manager + ebtables + dnsmasq + libvirt
+  become: yes
   pacman:
     name:
       - qemu
@@ -12,6 +13,7 @@
     - kvm
 
 - name: Start libvirtd service
+  become: yes
   systemd:
     name: libvirtd
     state: started
@@ -20,6 +22,7 @@
     - kvm
 
 - name: enable libvirtd and ensure it is not masked
+  become: yes
   systemd:
     name: libvirtd
     enabled: yes

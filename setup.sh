@@ -4,7 +4,7 @@ BASEDIR=$(dirname $0)
 . $BASEDIR/inc/functions
 
 explain "Install ansible"
-  tell pacman -Syy python-passlib ansible --noconfirm --needed
+  tell sudo pacman -Syy python-passlib ansible --noconfirm --needed
 
 explain "Change to ansible Installation"
   tell cd ansible

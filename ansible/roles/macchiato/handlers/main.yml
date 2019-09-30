@@ -1,5 +1,6 @@
 ---
 - name: start macchiato
+  become: yes
   service:
     name: macchiato.service
     state: started

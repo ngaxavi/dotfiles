@@ -1,5 +1,6 @@
 ---
 - name: Install imv
+  become: yes
   pacman:
     name: imv
     state: present

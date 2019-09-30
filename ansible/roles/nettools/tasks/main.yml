@@ -1,50 +1,60 @@
 ---
 - name: Install OpenVPN
+  become: yes
   pacman:
     name: openvpn
     state: present
 
 - name: Install MTR
+  become: yes
   pacman:
     name: mtr
     state: present
 
 - name: Install net-tools
+  become: yes
   pacman:
     name: net-tools
     state: present
 
 - name: Install bind-tools
+  become: yes
   pacman:
     name: bind-tools
     state: present
 
 - name: Install whois
+  become: yes
   pacman:
     name: whois
     state: present
 
 - name: Install netcat
+  become: yes
   pacman:
     name: gnu-netcat
     state: present
 
 - name: Install lftp
+  become: yes
   pacman:
     name: lftp
     state: present
 
 - name: Install nmap
+  become: yes
   pacman:
     name: nmap
     state: present
 
 - name: Install tcpdump
+  become: yes
   pacman:
     name: tcpdump
     state: present
 
 - name: Install sshuttle
+  become: yes
   pacman:
     name: sshuttle
     state: present
@@ -57,11 +67,13 @@
     - aur
 
 - name: Install wireshark
+  become: yes
   pacman:
     name: wireshark-qt
     state: present
 
 - name: Add user to wireshark group
+  become: yes
   user:
     name: "{{ user.name }}"
     group: wireshark
@@ -70,21 +82,25 @@
     - user
 
 - name: Install socat
+  become: yes
   pacman:
     name: socat
     state: present
 
 - name: Install nethogs
+  become: yes
   pacman:
     name: nethogs
     state: present
 
 - name: Install speedtest-cli
+  become: yes
   pacman:
     name: speedtest-cli
     state: present
 
 - name: Install wireguard and kernel modules
+  become: yes
   pacman:
     name:
       - wireguard-tools

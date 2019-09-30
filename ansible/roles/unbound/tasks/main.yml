@@ -1,5 +1,6 @@
 ---
 - name: Install Unbound
+  become: yes
   pacman:
     name: unbound
     state: present
@@ -11,6 +12,7 @@
     force: yes
 
 - name: Copy Unbound configuration file
+  become: yes
   template:
     src: unbound.conf.j2
     dest: /etc/unbound/unbound.conf
@@ -18,18 +20,21 @@
     - restart unbound
 
 - name: Enable and start Unbound
+  become: yes
   service:
     name: unbound.service
     enabled: yes
     state: started
 
 - name: Configure resolvconf to use Unbound
+  become: yes
   lineinfile:
     dest: /etc/resolvconf.conf
     state: present
     line: "name_servers=127.0.0.1"
 
 - name: Push Unbound root hits update service file
+  become: yes
   copy:
     src: roothints.service
     dest: /etc/systemd/system/roothints.service
@@ -37,6 +42,7 @@
     - reload systemd config
 
 - name: Push Unbound root hits update timer file
+  become: yes
   copy:
     src: roothints.timer
     dest: /etc/systemd/system/roothints.timer

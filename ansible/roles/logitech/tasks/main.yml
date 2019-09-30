@@ -13,6 +13,7 @@
     - user
 
 - name: Install Solaar
+  become: yes
   pacman:
       name: solaar
       state: present

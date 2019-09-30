@@ -1,10 +1,12 @@
 ---
 - name: Install calibre
+  become: yes
   pacman:
     name: calibre
     state: present
 
 - name: Jail calibre
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/calibre
@@ -13,6 +15,7 @@
     - firejail
 
 - name: Jail ebook-viewer
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/ebook-viewer

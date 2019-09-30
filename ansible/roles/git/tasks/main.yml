@@ -1,5 +1,6 @@
 ---
 - name: Install git
+  become: yes
   pacman:
     name: git
 

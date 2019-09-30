@@ -1,3 +1,4 @@
 ---
 - name: update DConf database
+  become: yes
   command: dconf update

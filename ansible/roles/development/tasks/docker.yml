@@ -1,5 +1,6 @@
 ---
 - name: docker
+  become: yes
   pacman:
     name: docker
     state: present
@@ -7,6 +8,7 @@
     - docker
 
 - name: Start docker service
+  become: yes
   systemd:
     name: docker
     state: started
@@ -14,6 +16,7 @@
     - docker
 
 - name: enable docker and ensure it is not masked
+  become: yes
   systemd:
     name: docker
     enabled: yes
@@ -22,6 +25,7 @@
     - docker
 
 - name: Add user to docker group
+  become: yes
   user:
     name: "{{ user.name }}"
     groups: docker

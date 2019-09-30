@@ -1,11 +1,13 @@
 ---
 - name: Creating gnome.d directory for DConf
+  become: yes
   file:
     path: /etc/dconf/db/gnome.d
     state: directory
     mode: 0755
 
 - name: Configuring GNOME
+  become: yes
   template:
     src: gnome.d/00-spark.j2
     dest: /etc/dconf/db/gnome.d/00-spark
@@ -13,6 +15,7 @@
   notify: update DConf database
 
 - name: Configuring DConf
+  become: yes
   lineinfile:
     path: /etc/dconf/profile/user
     line: "{{ item }}"

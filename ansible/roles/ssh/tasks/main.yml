@@ -1,10 +1,12 @@
 ---
 - name: Install OpenSSH
+  become: yes
   pacman:
     name: openssh
     state: present
 
 - name: Push OpenSSH daemon configuration file
+  become: yes
   template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
@@ -15,6 +17,7 @@
     state: directory
 
 - name: Push OpenSSH socket unit file
+  become: yes
   template:
     src: sshd-socket-override.conf.j2
     dest: /etc/systemd/system/sshd.socket.d/override.conf
@@ -23,6 +26,7 @@
     - restart sshd
 
 - name: Enable and start OpenSSH
+  become: yes
   service:
     name: sshd.socket
     enabled: yes
@@ -30,6 +34,7 @@
   when: ssh.enable_sshd is defined and ssh.enable_sshd == True
 
 - name: Disable and stop OpenSSH
+  become: yes
   service:
     name: sshd.socket
     enabled: no
@@ -37,31 +42,37 @@
   when: ssh.enable_sshd is defined and ssh.enable_sshd == True
 
 - name: Install sshfs
+  become: yes
   pacman:
     name: sshfs
     state: present
 
 - name: Install autossh
+  become: yes
   pacman:
     name: autossh
     state: present
 
 - name: Copy fuse configuration file
+  become: yes
   copy:
     src: fuse.conf
     dest: /etc/fuse.conf
 
 - name: Install keychain
+  become: yes
   pacman:
     name: keychain
     state: present
 
 - name: Install x11-ask-pass
+  become: yes
   pacman:
     name: x11-ssh-askpass
     state: present
 
 - name: Export SSH_ASKPASS environment variable
+  become: yes
   lineinfile:
     dest: /etc/profile
     state: present
@@ -84,6 +95,7 @@
   when: ssh.user_key is defined
 
 - name: Install Mosh
+  become: yes
   pacman:
     name: mosh
     state: present

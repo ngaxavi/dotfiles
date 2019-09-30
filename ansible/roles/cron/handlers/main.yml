@@ -1,15 +1,18 @@
 ---
 - name: restart cron
+  become: yes
   service:
     name: cronie.service
     state: restarted
 
 - name: restart acpid
+  become: yes
   service:
     name: acpid
     state: restarted
 
 - name: restart avahi-daemon
+  become: yes
   service:
     name: avahi-daemon
     state: restarted

@@ -1,5 +1,6 @@
 ---
 - name: Install chrony
+  become: yes
   pacman:
     name: chrony
     state: present
@@ -13,6 +14,7 @@
     - networkmanager
 
 - name: Push chrony configuration file
+  become: yes
   copy:
     src: chrony.conf
     dest: /etc/chrony.conf
@@ -20,6 +22,7 @@
     - restart chrony
 
 - name: Enable and start chrony
+  become: yes
   service:
     name: chronyd.service
     enabled: yes

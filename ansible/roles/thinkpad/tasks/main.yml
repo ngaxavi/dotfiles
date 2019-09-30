@@ -1,5 +1,6 @@
 ---
 - name: Install acpi_call for TLP battery functions
+  become: yes
   pacman:
     name: acpi_call-dkms
     state: present
@@ -7,6 +8,7 @@
     - battery
 
 - name: Install tpacpi-bat
+  become: yes
   pacman:
     name: tpacpi-bat
     state: present
@@ -14,6 +16,7 @@
     - battery
 
 - name: Install fprintd
+  become: yes
   pacman:
     name: fprintd
     state: present
@@ -21,6 +24,7 @@
     - fingerprint
 
 - name: Push sudo authentication file
+  become: yes
   template:
     src: pam.d/sudo.j2
     dest: /etc/pam.d/sudo
@@ -28,6 +32,7 @@
     - fingerprint
 
 - name: Push i3lock authentication file
+  become: yes
   template:
     src: pam.d/i3lock.j2
     dest: /etc/pam.d/i3lock
@@ -35,6 +40,7 @@
     - fingerprint
 
 - name: Push trackpoint udev rules
+  become: yes
   copy:
     src: 10-trackpoint.rules
     dest: /etc/udev/rules.d/10-trackpoint.rules

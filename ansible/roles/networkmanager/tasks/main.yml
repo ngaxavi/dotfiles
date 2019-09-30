@@ -1,5 +1,6 @@
 ---
 - name: Install NetworkManager and dependencies
+  become: yes
   pacman:
     name:
       - networkmanager
@@ -9,18 +10,21 @@
     state: present
 
 - name: Push connectivity check config
+  become: yes
   template:
       src: connectivity.conf.j2
       dest: /etc/NetworkManager/conf.d/20-connectivity.conf
   when: network.conn_check is defined
 
 - name: Enable and start NetworkManager
+  become: yes
   service:
       name: NetworkManager.service
       enabled: yes
       state: started
 
 - name: Enable and start NetworkManager dispatcher
+  become: yes
   service:
       name: NetworkManager-dispatcher.service
       enabled: yes

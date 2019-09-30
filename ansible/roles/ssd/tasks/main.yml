@@ -1,5 +1,6 @@
 ---
 - name: Install hdparm
+  become: yes
   pacman:
     name: hdparm
     state: present
@@ -10,6 +11,7 @@
   ignore_errors: True
 
 - name: Enable and start weekly filesystem TRIM timer
+  become: yes
   service:
     name: fstrim.timer
     enabled: yes

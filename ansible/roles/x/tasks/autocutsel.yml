@@ -1,5 +1,6 @@
 ---
 - name: Install autocutsel
+  become: yes
   pacman:
     name: autocutsel
     state: present

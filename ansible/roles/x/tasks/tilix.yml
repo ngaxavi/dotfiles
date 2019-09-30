@@ -1,5 +1,6 @@
 ---
 - name: Install tilix
+  become: yes
   pacman:
     name: tilix
     state: present

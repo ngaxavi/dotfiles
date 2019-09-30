@@ -1,10 +1,12 @@
 ---
 - name: restart unbound
+  become: yes
   service:
     name: unbound
     state: restarted
 
 - name: restart roothints
+  become: yes
   service:
     name: roothints.timer
     state: restarted

@@ -1,5 +1,6 @@
 ---
 - name: Install sxhkd
+  become: yes
   pacman:
     name: sxhkd
     state: present

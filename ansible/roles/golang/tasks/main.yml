@@ -18,6 +18,7 @@
     - user
 
 - name: Create system go dir
+  become: yes
   file:
     path: /usr/local/go
     state: directory

@@ -1,10 +1,12 @@
 ---
 - name: Copy pacman configuration file
+  become: yes
   copy:
     src: pacman.conf
     dest: /etc/pacman.conf
 
 - name: Refresh pacman mirrors
+  become: yes
   pacman:
     update_cache: yes
 

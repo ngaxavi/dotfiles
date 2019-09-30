@@ -1,10 +1,12 @@
 ---
 - name: restart paccache
+  become: yes
   service:
     name: paccache.timer
     state: restarted
 
 - name: stop systemd per-user instance
+  become: yes
   service:
     name: "user@{{ user.uid }}"
     state: stopped

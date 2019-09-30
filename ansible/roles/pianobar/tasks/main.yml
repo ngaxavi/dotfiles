@@ -1,10 +1,12 @@
 ---
 - name: Install pianobar
+  become: yes
   pacman:
     name: pianobar
     state: present
 
 - name: Jail pianobar
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/pianobar
@@ -13,6 +15,7 @@
     - firejail
 
 - name: Push pianobar firejail profile
+  become: yes
   copy:
     src: firejail/pianobar.profile
     dest: /usr/local/etc/firejail/pianobar.profile

@@ -1,5 +1,6 @@
 ---
 - name: Install Tor
+  become: yes
   pacman:
     name:
       - tor
@@ -7,6 +8,7 @@
     state: present
 
 - name: Set Tor to run as tor
+  become: yes
   lineinfile:
     dest: /etc/tor/torrc
     regexp: ^User
@@ -14,6 +16,7 @@
     line: "User tor"
 
 - name: Create Tor systemd unit file directory
+  become: yes
   file:
     path: /etc/systemd/system/tor.service.d
     state: directory
@@ -21,6 +24,7 @@
     - firejail
 
 - name: Push Tor socket unit file
+  become: yes
   copy:
     src: tor-service-override.conf
     dest: /etc/systemd/system/tor.service.d/override.conf
@@ -30,6 +34,7 @@
     - firejail
 
 - name: Verify Tor firejail local profile exists
+  become: yes
   file:
     path: /etc/firejail/tor.local
     state: touch
@@ -37,6 +42,7 @@
     - firejail
 
 - name: Allow Tor firejail /dev access
+  become: yes
   lineinfile:
     dest: /etc/firejail/tor.local
     line: "ignore private-dev"

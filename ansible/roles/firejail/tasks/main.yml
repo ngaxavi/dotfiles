@@ -1,10 +1,12 @@
 ---
 - name: Install firejail
+  become: yes
   pacman:
     name: firejail
     state: present
 
 - name: Install firewarden
+  become: yes
   aur:
     name: firewarden
     user: "{{ user.name }}"
@@ -12,22 +14,26 @@
     - aur
 
 - name: Install firejail profile update script
+  become: yes
   copy:
     src: profile-activate.sh
     dest: /usr/local/bin/profile-activate
     mode: 0755
 
 - name: Create firejail profile directory
+  become: yes
   file:
     path: /usr/local/etc/firejail
     state: directory
 
 - name: Verify firejail globals file exists
+  become: yes
   file:
     path: /etc/firejail/globals.local
     state: touch
 
 - name: Add blacklist to globals
+  become: yes
   lineinfile:
     dest: /etc/firejail/globals.local
     state: present

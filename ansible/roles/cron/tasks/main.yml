@@ -1,21 +1,25 @@
 ---
 - name: Install cronie
+  become: yes
   pacman:
     name: cronie
     state: present
 
 - name: Enable cronie
+  become: yes
   service:
     name: cronie.service
     enabled: yes
     state: started
 
 - name: Install acpid
+  become: yes
   pacman:
     name: acpid
     state: present
 
 - name: Enable acpid
+  become: yes
   service:
     name: acpid.service
     enabled: yes
@@ -23,17 +27,20 @@
 
 
 - name: Install avahi
+  become: yes
   pacman:
     name: avahi
     state: present
 
 - name: Enable avahi daemon
+  become: yes
   service:
     name: avahi-daemon
     enabled: yes
     state: started
 
 - name: Install dbus
+  become: yes
   pacman:
     name: dbus
     state: present

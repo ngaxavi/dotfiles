@@ -1,5 +1,6 @@
 ---
 - name: Install poppler-glib
+  become: yes
   pacman:
     name: poppler-glib
     state: present
@@ -7,6 +8,7 @@
     - gimp
 
 - name: Install GIMP
+  become: yes
   pacman:
     name:
       - gimp
@@ -16,14 +18,16 @@
     - gimp
 
 - name: Jail GIMP
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/gimp
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/gimp
+    state: link
   tags:
     - gimp
     - firejail
 
 - name: Install GIMP raw support
+  become: yes
   pacman:
     name: gimp-nufraw
     state: present

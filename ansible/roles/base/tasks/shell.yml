@@ -1,5 +1,6 @@
 ---
 - name: Install Bash
+  become: yes
   pacman:
     name:
       - bash
@@ -9,6 +10,7 @@
     - shell
 
 - name: Install Fish
+  become: yes
   pacman:
     name:
       - fish

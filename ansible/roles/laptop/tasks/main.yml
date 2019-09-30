@@ -2,6 +2,7 @@
 - include: tlp.yml
 
 - name: Copy touchpad configuration file
+  become: yes
   copy:
     src: 30-touchpad.conf
     dest: /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -9,16 +10,19 @@
     - libinput
 
 - name: Copy logind configuration file
+  become: yes
   copy:
     src: logind.conf
     dest: /etc/systemd/logind.conf
 
 - name: Push low battery warning script
+  become: yes
   copy:
     src: lowbatt.sh
     dest: /usr/local/bin/lowbatt mode=0755
 
 - name: Push low battery warning service file
+  become: yes
   template:
     src: lowbatt.service.j2
     dest: /etc/systemd/system/lowbatt.service
@@ -26,6 +30,7 @@
     - reload systemd config
 
 - name: Push low battery timer file
+  become: yes
   template:
     src: lowbatt.timer.j2
     dest: /etc/systemd/system/lowbatt.timer
@@ -34,17 +39,20 @@
     - restart lowbatt
 
 - name: Enable and start lowbatt timer
+  become: yes
   service:
     name: lowbatt.timer
     enabled: yes
     state: started
 
 - name: Install light
+  become: yes
   pacman:
     name: light
     state: present
 
 - name: Install powertop
+  become: yes
   pacman:
     name: powertop
     state: present
@@ -57,6 +65,7 @@
     - aur
 
 - name: Install cmake for battery-stats
+  become: yes
   pacman:
     name: cmake
     state: present

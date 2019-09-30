@@ -1,45 +1,54 @@
 ---
 - name: Install Xorg
+  become: yes
   pacman:
     name: xorg-server
     state: present
 
 - name: Install Xinit
+  become: yes
   pacman:
     name: xorg-xinit
     state: present
 
 - name: Install xmodmap
+  become: yes
   pacman:
     name: xorg-xmodmap
     state: present
 
 - name: Install xdpyinfo
+  become: yes
   pacman:
     name: xorg-xdpyinfo
     state: present
 
 - name: Install xev
+  become: yes
   pacman:
     name: xorg-xev
     state: present
 
 - name: Install xorg-sessreg
+  become: yes
   pacman:
     name: xorg-sessreg
     state: present
 
 - name: Install xautomation
+  become: yes
   pacman:
     name: xautomation
     state: present
 
 - name: Install video driver(s)
+  become: yes
   pacman:
     name: "{{ video_drivers }}"
     state: present
 
 - name: Add user to video group
+  become: yes
   user:
     name: "{{ user.name }}"
     groups: video
@@ -48,6 +57,7 @@
     - user
 
 - name: Enable middle-click scrolling
+  become: yes
   template:
     src: 30-scroll.conf
     dest: /etc/X11/xorg.conf.d/30-scroll.conf
@@ -56,6 +66,7 @@
     - libinput
 
 - name: Remap mouse buttons
+  become: yes
   template:
     src: 30-button_mapping.conf
     dest: /etc/X11/xorg.conf.d/30-button_mapping.conf

@@ -1,10 +1,12 @@
 ---
 - name: Install taskwarrior
+  become: yes
   pacman:
     name: task
     state: present
 
 - name: Install timewarrior
+  become: yes
   pacman:
     name: timew
     state: present

@@ -1,21 +1,25 @@
 ---
 - name: Install xautolock
+  become: yes
   pacman:
     name: xautolock
     state: present
 
 - name: Install physlock
+  become: yes
   pacman:
     name: physlock
     state: present
 
 - name: Push lock script
+  become: yes
   copy:
     src: lock.sh
     dest: /usr/local/bin/lock
     mode: 0755
 
 - name: Push screen lock service file
+  become: yes
   copy:
     src: screenlock.service
     dest: /etc/systemd/system/screenlock@.service
@@ -23,6 +27,7 @@
     - reload systemd config
 
 - name: Enable screen lock service
+  become: yes
   service:
     name: "screenlock@{{ user.name }}.service"
     enabled: yes

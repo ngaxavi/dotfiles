@@ -11,6 +11,7 @@
     - restart pulse as user
 
 - name: Install bluetooth libraries and tools
+  become: yes
   pacman:
     name:
       - bluez
@@ -22,6 +23,7 @@
     - restart pulse as user
 
 - name: Auto-switch between HSP/HSF and A2DP
+  become: yes
   lineinfile:
     dest: /etc/pulse/default.pa
     regex: "^load-module module-bluetooth-policy"
@@ -43,6 +45,7 @@
   when: bluetooth.disable == False
 
 - name: Enable and start the bluetooth service
+  become: yes
   service:
     name: bluetooth.service
     enabled: yes
@@ -50,6 +53,7 @@
   when: bluetooth.disable == False
 
 - name: Disable and stop the bluetooth service
+  become: yes
   service:
     name: bluetooth.service
     enabled: no
@@ -57,6 +61,7 @@
   when: bluetooth.disable == True
 
 - name: Block the bluetooth service
+  become: yes
   service:
     name: "rfkill-block@bluetooth.service"
     enabled: yes

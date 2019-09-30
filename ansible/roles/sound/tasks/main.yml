@@ -1,10 +1,12 @@
 ---
 - name: Install alsa-utils
+  become: yes
   pacman:
     name: alsa-utils
     state: present
 
 - name: Install PulseAudio
+  become: yes
   pacman:
     name:
       - pulseaudio
@@ -13,12 +15,14 @@
     state: present
 
 - name: Switch output to newly connected devices
+  become: yes
   lineinfile:
     dest: /etc/pulse/default.pa
     state: present
     line: "load-module module-switch-on-connect"
 
 - name: Install pasystray
+  become: yes
   pacman:
     name: pasystray
     state: present

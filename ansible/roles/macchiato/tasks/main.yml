@@ -13,6 +13,7 @@
   with_items: "{{ ansible_interfaces }}"
 
 - name: Enable macchiato
+  become: yes
   service:
     name: macchiato.service
     enabled: yes
@@ -21,6 +22,7 @@
     - start macchiato
 
 - name: Disable and stop macchiato
+  become: yes
   service:
     name: macchiato.service
     enabled: no

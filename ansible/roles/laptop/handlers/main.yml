@@ -1,10 +1,12 @@
 ---
 - name: restart tlp
+  become: yes
   service:
     name: tlp.service
     state: restarted
 
 - name: restart lowbatt
+  become: yes
   service:
     name: lowbatt.timer
     state: restarted

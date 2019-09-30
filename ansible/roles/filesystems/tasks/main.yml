@@ -1,5 +1,6 @@
 ---
 - name: Install filesystem packages
+  become: yes
   pacman:
     name: "{{ filesystem_packages }}"
     state: present

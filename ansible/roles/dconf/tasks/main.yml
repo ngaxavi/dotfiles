@@ -1,5 +1,6 @@
 ---
 - name: Creating DConf database directory
+  become: yes
   file:
     path: /etc/dconf/db
     state: directory
@@ -7,6 +8,7 @@
     recurse: yes
 
 - name: Creating DConf profile directory
+  become: yes
   file:
     path: /etc/dconf/profile
     state: directory

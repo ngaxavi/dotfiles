@@ -1,5 +1,6 @@
 ---
 - name: Install Firefox
+  become: yes
   pacman:
     name: firefox
     state: present
@@ -7,6 +8,7 @@
     - firefox
 
 - name: Jail Firefox
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/firefox
@@ -16,6 +18,7 @@
     - firejail
 
 - name: Verify Firefox firejail local profile exists
+  become: yes
   file:
     path: /etc/firejail/firefox.local
     state: touch
@@ -24,6 +27,7 @@
     - firejail
 
 - name: Restrict Firefox access to /etc
+  become: yes
   lineinfile:
     dest: /etc/firejail/firefox.local
     regexp: "^private-etc"
@@ -40,6 +44,7 @@
     - chrome
 
 - name: Jail Chrome
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/chrome
@@ -49,6 +54,7 @@
     - firejail
 
 - name: Verify Chrome firejail local profile exists
+  become: yes
   file:
     path: /etc/firejail/chrome.local
     state: touch
@@ -57,6 +63,7 @@
     - firejail
 
 - name: Restrict Chrome access to /etc
+  become: yes
   lineinfile:
     dest: /etc/firejail/chrome.local
     regexp: "^private-etc"
@@ -66,6 +73,7 @@
     - firejail
 
 - name: Install Pepper Flash
+  become: yes
   pacman:
     name: pepper-flash
     state: present
@@ -82,6 +90,7 @@
     - aur
 
 - name: Jail tor-browser
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/tor-browser
@@ -91,6 +100,7 @@
     - firejail
 
 - name: Push tor-browser firejail profile
+  become: yes
   copy:
     src: firejail/tor-browser.profile
     dest: /usr/local/etc/firejail/tor-browser.profile
@@ -101,6 +111,7 @@
     - firejail
 
 - name: Push rofi browser chooser
+  become: yes
   template:
     src: browser.sh.j2
     dest: /usr/local/bin/browser
@@ -110,6 +121,7 @@
     - chooser
 
 - name: Create local desktop application dir
+  become: yes
   file:
     path: /usr/local/share/applications
     state: directory
@@ -118,6 +130,7 @@
     - chooser
 
 - name: Push rofi browser chooser desktop file
+  become: yes
   copy:
     src: browser.desktop
     dest: /usr/local/share/applications/browser.desktop
@@ -126,6 +139,7 @@
     - chooser
 
 - name: Verify mimeapps.list exists
+  become: yes
   file:
     path: /etc/xdg/mimeapps.list
     state: touch
@@ -134,6 +148,7 @@
     - chooser
 
 - name: Set rofi browser chooser as default application for relevant mimetypes
+  become: yes
   lineinfile:
     dest: /etc/xdg/mimeapps.list
     regexp: "{{ item.regexp }}"
