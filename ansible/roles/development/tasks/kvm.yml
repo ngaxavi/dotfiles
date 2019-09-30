@@ -32,6 +32,7 @@
     - kvm
 
 - name: Add user to libvirt group
+  become: yes
   user:
     name: "{{ user.name }}"
     groups: libvirt

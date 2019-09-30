@@ -8,6 +8,7 @@
     - packages
 
 - name: Create pacman hook directory
+  become: yes
   file:
     path: /etc/pacman.d/hooks
     state: directory
@@ -15,6 +16,7 @@
     - packages
 
 - name: Use all cores when compressing packages
+  become: yes
   lineinfile:
     dest: /etc/makepkg.conf
     regexp: "^COMPRESSXZ"

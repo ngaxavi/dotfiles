@@ -55,6 +55,8 @@
   vars_prompt:
     - name: user_real_name
       prompt: "Please enter your real name"
+      private: no
 
     - name: user_email
-      prompt: "Please give your email"
+      prompt: "Please enter your email"
+      private: no

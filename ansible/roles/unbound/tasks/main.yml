@@ -6,6 +6,7 @@
     state: present
 
 - name: Download root hints
+  become: yes
   get_url:
     url: https://www.internic.net/domain/named.cache
     dest: /etc/unbound/root.hints

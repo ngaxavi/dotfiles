@@ -8,6 +8,7 @@
     - aur
 
 - name: Configure interfaces for macchiato
+  become: yes
   copy:
     src: macchiato_default.sh
     dest: /etc/macchiato.d/{{ item }}.sh

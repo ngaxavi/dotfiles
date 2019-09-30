@@ -3,6 +3,7 @@
 - include: kvm.yml
 
 - name: Install nodejs + npm + yarn
+  become: yes
   pacman:
     name:
       - nodejs

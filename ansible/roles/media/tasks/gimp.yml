@@ -18,6 +18,7 @@
     - gimp
 
 - name: Jail GIMP
+  become: yes
   file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/gimp
