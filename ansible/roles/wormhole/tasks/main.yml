@@ -1,5 +1,6 @@
 ---
 - name: Install magic-wormhole
+  become: yes
   aur:
     name:
       - python-hkdf

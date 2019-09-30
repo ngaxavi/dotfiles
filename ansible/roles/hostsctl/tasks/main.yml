@@ -1,5 +1,6 @@
 ---
 - name: Install hostsctl
+  become: yes
   aur:
     name: hostsctl
     user: "{{ user.name }}"
@@ -7,9 +8,11 @@
     - aur
 
 - name: Push hostsctl config
+  become: yes
   template:
     src: hostsctl.conf.j2
     dest: /etc/hostsctl.conf
 
 - name: Update hostsctl
+  become: yes
   command: hostsctl update

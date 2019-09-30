@@ -1,5 +1,6 @@
 ---
 - name: Install srandrd
+  become: yes
   aur:
     name: srandrd
     user: "{{ user.name }}"

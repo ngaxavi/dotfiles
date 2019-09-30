@@ -60,6 +60,7 @@
     state: present
 
 - name: Install pdsh
+  become: yes
   aur:
     name: pdsh
     user: "{{ user.name }}"

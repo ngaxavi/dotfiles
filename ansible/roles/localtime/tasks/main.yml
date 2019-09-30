@@ -1,5 +1,6 @@
 ---
 - name: Install localtime
+  become: yes
   aur:
     name: localtime-git
     user: "{{ user.name }}"

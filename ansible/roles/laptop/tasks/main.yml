@@ -58,6 +58,7 @@
     state: present
 
 - name: Install powerstat
+  become: yes
   aur:
     name: powerstat-git
     user: "{{ user.name }}"
@@ -71,6 +72,7 @@
     state: present
 
 - name: Install battery-stats
+  become: yes
   aur:
     name: battery-stats-git
     user: "{{ user.name }}"
@@ -78,6 +80,7 @@
     - aur
 
 - name: Install battop
+  become: yes
   aur:
     name: battop
     user: "{{ user.name }}"

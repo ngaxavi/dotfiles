@@ -1,5 +1,6 @@
 ---
 - name: Install PulseAudio bluetooth with LDAC/aptX support
+  become: yes
   aur:
     name:
       - libldac
@@ -38,6 +39,7 @@
   become_user: "{{ user.name }}"
 
 - name: Unblock the bluetooth service
+  become: yes
   service:
     name: "rfkill-block@bluetooth.service"
     enabled: no

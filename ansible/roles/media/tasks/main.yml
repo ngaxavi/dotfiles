@@ -18,6 +18,7 @@
     state: present
 
 - name: Install Metadata Anonymisation Toolkit
+  become: yes
   aur:
     name: mat2
     user: "{{ user.name }}"

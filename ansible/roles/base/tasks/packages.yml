@@ -31,6 +31,7 @@
     - packages
 
 - name: Install AUR base packages
+  become: yes
   aur:
     name: "{{ aur.packages }}"
     user: "{{ user.name }}"
@@ -39,6 +40,7 @@
     - packages
 
 - name: Push pacman cache cleanup service
+  become: yes
   copy:
     src: paccache.service
     dest: /etc/systemd/system/paccache.service
@@ -48,6 +50,7 @@
     - packages
 
 - name: Push pacman cache cleanup timer
+  become: yes
   copy:
     src: paccache.timer
     dest: /etc/systemd/system/paccache.timer
@@ -58,6 +61,7 @@
     - packages
 
 - name: Enable and start pacman cache cleanup timer
+  become: yes
   service:
     name: paccache.timer
     enabled: yes

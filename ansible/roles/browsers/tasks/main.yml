@@ -37,6 +37,7 @@
     - firejail
 
 - name: Install Google Chrome
+  become: yes
   aur:
     name: google-chrome
     user: "{{ user.name }}"
@@ -81,6 +82,7 @@
     - chrome
 
 - name: Install tor-browser
+  become: yes
   aur:
     name: tor-browser
     user: "{{ user.name }}"

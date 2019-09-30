@@ -1,4 +1,5 @@
 user:
+    group: users
     name: ngansop
     real_name: Xavier Ngansop
     email:  ngaxavi@gmail.com

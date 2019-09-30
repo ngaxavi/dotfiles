@@ -1,5 +1,6 @@
 ---
 - name: Disabling GNOME Shell top left hot corner
+  become: yes
   aur:
     name: gnome-shell-extension-no-topleft-hot-corner
     user: "{{ user.name }}"

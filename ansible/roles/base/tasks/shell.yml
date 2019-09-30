@@ -12,8 +12,7 @@
 - name: Install Fish
   become: yes
   pacman:
-    name:
-      - fish
+    name: fish
     state: present
   tags:
     - shell

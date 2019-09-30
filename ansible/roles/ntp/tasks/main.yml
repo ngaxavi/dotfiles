@@ -6,6 +6,7 @@
     state: present
 
 - name: Install chrony networkmanager dispatcher
+  become: yes
   aur:
     name: networkmanager-dispatcher-chrony
     user: "{{ user.name }}"
