@@ -18,11 +18,20 @@ success() {
 
 if [ -z "$1" ]
 then
-      SWAP="8G"
-      success "swap size is 8GB"
+      SWAP="25G"
+      success "swap size is 25GB"
 else
       SWAP=$1
       success "swap size is $1"
+fi
+
+if [ -z "$2" ]
+then
+      DATA="250G"
+      success "data size is 250GB"
+else
+      DATA=$2
+      success "data size is $2"
 fi
 
 explain "Create a single partition for LUKS"
@@ -35,12 +44,12 @@ tell cryptsetup luksOpen /dev/sda1 lvm
 tell pvcreate /dev/mapper/lvm
 tell vgcreate arch /dev/mapper/lvm
 tell lvcreate -L "$SWAP" arch -n swap
-[ -n "$2" ] && tell lvcreate -L "$2" arch -n data
+tell lvcreate -L "$DATA" arch -n data
 tell lvcreate -l +100%FREE arch -n root
 tell lvdisplay
 tell mkswap -L swap /dev/mapper/arch-swap
 tell mkfs.ext4 /dev/mapper/arch-root
-[ -n  "$2" ] &&  tell mkfs.ntfs /dev/mapper/arch-data
+tell mkfs.ext4 /dev/mapper/arch-data
 tell mount /dev/mapper/arch-root /mnt
 tell swapon /dev/mapper/arch-swap
 

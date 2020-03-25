@@ -36,14 +36,14 @@ tell passwd
 
 explain "Set your mkinitcpio encrypt/lvm2 hooks and rebuild."
 sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
-tell mkinitcpio -p linux
+tell mkinitcpio -p linux-lts
 
 explain "Add a keyfile to decrypt the root volume and properly set the hooks"
 tell dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
 tell cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
 tell chmod 000 /crypto_keyfile.bin
 tell sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
-tell mkinitcpio -p linux
+tell mkinitcpio -p linux-lts
 
 explain "Configure GRUB and Set the UUID of the encrypted root device"
 echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub

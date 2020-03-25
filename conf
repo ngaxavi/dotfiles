@@ -114,9 +114,7 @@ browser_choices:
     - google-chrome -P work
     - firefox
     - firefox
-    - tor-browser-en
-    - play
-    - qcode
+    - brave-bin
     - "| xclip -selection c"
 
 passwordless_sudo:
