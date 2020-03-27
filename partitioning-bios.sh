@@ -58,7 +58,7 @@ tell cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 tell grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
 
 explain "Install base system"
-tell pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub ansible bash-completion wget
+tell pacstrap -i /mnt base base-devel linux-lts linux-firmware net-tools wireless_tools dialog wpa_supplicant git grub ansible bash-completion wget
 
 explain "Generate and verify fstab"
 genfstab -U -p /mnt >> /mnt/etc/fstab
