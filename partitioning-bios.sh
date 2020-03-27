@@ -27,8 +27,8 @@ fi
 
 if [ -z "$2" ]
 then
-      DATA="250G"
-      success "data size is 250GB"
+      DATA="220G"
+      success "data size is 220GB"
 else
       DATA=$2
       success "data size is $2"
