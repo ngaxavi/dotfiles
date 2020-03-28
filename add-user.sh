@@ -31,10 +31,37 @@ tell useradd -m -g users -s /bin/bash "$1"
 tell passwd "$1"
 EDITOR=nano visudo
 tell gpasswd -a "$1" wheel
+tell gpasswd -a "$1" storage
+tell gpasswd -a "$1" power
+tell gpasswd -a "$1" lp
+tell gpasswd -a "$1" network
+tell gpasswd -a "$1" audio
+tell gpasswd -a "$1" video
+tell gpasswd -a "$1" optical
+tell gpasswd -a "$1" games
 
-explain "Install keyboard"
-tell pacman -S xf86-input-synaptics --noconfirm --needed
 
-explain "Reboot"
-tell reboot
+explain "SSD config"
+tell systemctl enable --now fstrim.timer
+
+explain "Install and enable other services"
+tell pacman -Sy ntp cronie acpid cups avahi dbus --needed
+tell systemctl enable systemctl enable org.cups.cupsd.service
+tell systemctl enable --now cronie
+tell systemctl enable ntpd
+tell systemctl enable acpid
+tell systemctl enable avahi-daemon
+tell systemctl enable --now systemd-timesyncd.service
+tell data
+tell hwclock -w
+
+explain "Installation X and configuration"
+tell pacman -S xorg-server xorg-xinit --needed
+tell pacman -S xorg-drivers --needed
+tell pacman -S xf86-input-synaptics --needed
+tell localectl set-x11-keymap de pc105 de_nodeadkeys
+
+explain "Installation XFCE Desktop"
+tell pacman -S xfce4 xfce4-goodies human-icon-theme --needed
+
 
