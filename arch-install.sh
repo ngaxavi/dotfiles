@@ -20,7 +20,7 @@ explain "Format Disk"
 tell mkfs.ext4 -L arch-root /dev/sda1
 tell mkswap -L swap /dev/sda2
 tell mkfs.ext4 -L arch-data /dev/sda3
-tell mkdir /mnt/data
+#tell mkdir /mnt/data
 tell mount /dev/sda1 /mnt
 # tell mount /dev/sda3 /mnt/data
 tell swapon -L swap
