@@ -22,14 +22,14 @@ tell mkswap -L swap /dev/sda2
 tell mkfs.ext4 -L arch-data /dev/sda3
 tell mkdir /mnt/data
 tell mount /dev/sda1 /mnt
-tell mount /dev/sda3 /mnt/data
+# tell mount /dev/sda3 /mnt/data
 tell swapon -L swap
 
 explain "System Base - Install"
 tell cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 tell grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
-tell pacman -Syu
-tell pacman -S reflector
+#tell pacman -Syu
+#tell pacman -S reflector
 
 explain "Install base system"
 tell pacstrap /mnt base base-devel linux-lts linux-firmware nano
