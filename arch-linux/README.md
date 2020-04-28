@@ -32,7 +32,7 @@ root@arch ~ # mkfs.ext4 -L arch /dev/sda1
 root@arch ~ # mkswap -L swap /dev/sda2
 root@arch ~ # mount /dev/sda1 /mnt
 root@arch ~ # mkdir /mnt/data
-root@arch ~ # mount /dev/sda3 /mnt/data
+root@arch ~ # mount /dev/sda3 /mnt/media/data
 root@arch ~ # swapon -L swap
 ```
 
