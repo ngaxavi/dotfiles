@@ -1,25 +1,32 @@
-# Path to Oh My Fish install.
-set -gx OMF_PATH "/home/{{user.name}}/.local/share/omf"
-
-# Customize Oh My Fish configuration path.
-set -gx OMF_CONFIG "/home/{{user.name}}/.config/omf"
-
-# Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
-
-# Disable the Greeting message
-set -U fish_greeting
-
-# Go path
-set -x PATH $PATH $HOME/go/bin
-
-#NPM
-set -x PATH $PATH $HOME/.npm-global/bin
+# Set Kubeconfig
+set -gx KUBECONFIG (echo (find ~/.kube -type f -name config.\*.yaml) | sed 's/[[:space:]]/:/g')
 
 
-# Abbreviations
+# Kubernetes Abbreviations
 abbr kc "kubectl"
+abbr kd 'kubectl describe'
+abbr kdno 'kubectl describe nodes'
+abbr kdns 'kubectl describe namespaces'
+abbr kdpo 'kubectl describe pods'
+abbr kex 'kubectl exec -i -t'
+abbr kg 'kubectl get'
+abbr kga 'kubectl get all'
+abbr kgd 'kubectl get deploy'
+abbr kgi 'kubectl get ingress'
+abbr kgno 'kubectl get nodes'
+abbr kgns 'kubectl get namespaces'
+abbr kgow 'kubectl get -o=wide'
+abbr kgoy 'kubectl get -o=yaml'
+abbr kgpo 'kubectl get pods'
+abbr kgs 'kubectl get service'
+abbr klo 'kubectl logs -f'
+abbr kp 'kubectl proxy'
+abbr krm 'kubectl delete'
+abbr krmpo 'kubectl delete pods'
 
+
+
+# System Abbreviations
 abbr p "sudo pacman"
 abbr pacup "sudo pacman -Syu"
 abbr aurup "yay -Syua"
@@ -28,11 +35,11 @@ abbr sdn "sudo shutdown -h now"
 abbr lsp "sudo pacman -Qett --color=always | less"
 
 # The rest of my fun git abbres
-abbr gpl "git pull"
-abbr gph "git push"
+abbr gpl "git pull --no-rebase"
+abbr gpm "git push origin master"
 abbr gl "git pull --prune"
 abbr glog "git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-abbr gp "git push origin HEAD"
+abbr gp "git push"
 
 # Remove `+` and `-` from start of diff lines; just rely upon color.
 abbr gd 'git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
@@ -46,8 +53,14 @@ abbr gb "git branch"
 abbr gs "git status -sb" # upgrade your git if -sb breaks for you. it's fun.
 abbr gac "git add -A && git commit"
 
-# Base16 Shell
-if status --is-interactive
-    set BASE16_SHELL "$HOME/.config/base16-shell/"
-    source "$BASE16_SHELL/profile_helper.fish"
+#NPM
+set -x PATH $PATH $HOME/.npm-global/bin
+
+# Blur config
+set -l ppid (cat /proc/(echo %self)/status | grep PPid | cut -f2)
+if string match -r 'tilix' (ps --no-headers -p $ppid -o comm) 1> /dev/null
+    sleep 0.01
+    for wid in (xdotool search --pid $ppid)
+        xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid
+    end
 end
