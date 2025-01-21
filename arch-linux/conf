@@ -3,7 +3,6 @@ user:
     uid: 1000
     group: ngansop
     shell: /usr/bin/fish
-    email:  ngaxavi@gmail.com
     log:
         dir: log
         rotate: 8
