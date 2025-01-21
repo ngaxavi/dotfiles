@@ -1,0 +1,7 @@
+theme = catppuccin-mocha
+font-size = 13
+window-decoration = true
+background-blur-radius = 20
+background-opacity = 0.9
+background-blur-radius = 20
+font-family = "JetBrainsMono Nerd Font"
