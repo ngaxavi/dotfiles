@@ -64,6 +64,7 @@
           "libfido2"
           "gnupg"
           "openssl@3"
+          "fish"
         ];
         casks = [
           "ghostty"
