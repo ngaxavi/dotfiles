@@ -9,7 +9,7 @@ set -U fish_greeting
 set -xg THEME_DIR /usr/share/themes/Catppuccin-Mocha-Standard-Blue-Dark
 
 # NIX
-set -x PATH $PATH /run/current-system/sw/bin
+#set -x PATH $PATH /run/current-system/sw/bin
 
 #NPM
 set -x PATH $PATH $HOME/.npm-global/bin
@@ -24,8 +24,6 @@ thefuck --alias | source
 # Set up fzf key bindings
 fzf --fish | source
 
-# Yubikey
-set -gx SSH_SK_PROVIDER /usr/local/lib/sk-libfido2.dylib
 
 # GPG
 set -gx GPG_TTY (tty)

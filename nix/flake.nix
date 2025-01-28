@@ -84,6 +84,11 @@
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
       };
+
+      # Set fish as the default shell
+      users.knownUsers = [ "ngaxavi" ];
+      users.users.ngaxavi.uid = 501;
+      users.users.ngaxavi.shell = pkgs.fish;
 	
      # fonts.packages = [
       #	pkgs.nerdfonts.jetbrains-mono
@@ -100,6 +105,7 @@
       nix.settings.experimental-features = "nix-command flakes";
 
       # Enable alternative shell support in nix-darwin.
+      programs.zsh.enable = true;
       programs.fish.enable = true;
 
       # Set Git commit hash for darwin-version.
