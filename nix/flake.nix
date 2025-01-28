@@ -52,6 +52,7 @@
           pkgs.fzf
           pkgs.eza
           pkgs.thefuck
+          pkgs.terraform
         ];
 
       services.nix-daemon.enable = true; 
