@@ -7,9 +7,10 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew, determinate }:
   let
     configuration = { pkgs, config, ... }: {
       
@@ -50,6 +51,7 @@
           pkgs.bat
           pkgs.fzf
           pkgs.eza
+          pkgs.thefuck
         ];
 
       services.nix-daemon.enable = true; 
@@ -57,10 +59,15 @@
       homebrew = {
         enable = true;
         brews = [
-          "fisher"
+          "stow"
+          "ykman"
+          "libfido2"
+          "gnupg"
+          "openssl@3"
         ];
         casks = [
-          "firefox"
+          "ghostty"
+          "yubico-yubikey-manager"
           "appcleaner"
           "brave-browser"
           "font-jetbrains-mono-nerd-font"
@@ -113,6 +120,7 @@
       modules = [	 
       	configuration
 	      mac-app-util.darwinModules.default
+	      determinate.darwinModules.default
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
