@@ -66,6 +66,9 @@
           "gnupg"
           "openssl@3"
           "fish"
+          "nvm"
+          "pnpm"
+          "npm"
         ];
         casks = [
           "ghostty"

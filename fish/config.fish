@@ -40,12 +40,6 @@ alias cat "bat"
 # Go Path
 set -x PATH $PATH $HOME/go/bin
 
-#LIBVIRT
-set -gx LIBVIRT_DEFAULT_URI qemu:///system
-
-#Snap
-set -x PATH $PATH /var/lib/snapd/snap/bin
-
 
 # Set Kubeconfig
 set -gx KUBECONFIG (echo (find ~/.kube -type f -name config.\*.yaml) | sed 's/[[:space:]]/:/g')
