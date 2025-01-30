@@ -7,10 +7,9 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew, determinate }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew }:
   let
     configuration = { pkgs, config, ... }: {
       
@@ -65,10 +64,11 @@
           "libfido2"
           "gnupg"
           "openssl@3"
-          "fish"
           "nvm"
           "pnpm"
           "npm"
+          "curlie"
+          "xh"
         ];
         casks = [
           "ghostty"
@@ -81,9 +81,16 @@
           "jetbrains-toolbox"
           "docker"
           "microsoft-teams"
+          "logi-options+"
+          "teamviewer"
+          "notion"
+          "warp"
+          "signal"
+          "spotify"
         ];
         masApps = {
           "Windows App" = 1295203466;
+          "CopyClip" = 595191960;
         };
         onActivation.cleanup = "zap";
         onActivation.autoUpdate = true;
@@ -105,6 +112,13 @@
         finder.AppleShowAllExtensions = true;
         finder.FXPreferredViewStyle = "clmv";
       };
+
+      # https://samasaur1.github.io/blog/jdks-on-nix-darwin
+      system.activationScripts.extraActivation.text = ''
+        ln -sf "${pkgs.jdk17_headless}/zulu-17.jdk" "/Library/Java/JavaVirtualMachines/"
+        ln -sf "${pkgs.jdk21_headless}/zulu-21.jdk" "/Library/Java/JavaVirtualMachines/"
+        ln -sf "${pkgs.jdk23_headless}/zulu-23.jdk" "/Library/Java/JavaVirtualMachines/"
+      '';
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
@@ -131,7 +145,6 @@
       modules = [	 
       	configuration
 	      mac-app-util.darwinModules.default
-	      determinate.darwinModules.default
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
