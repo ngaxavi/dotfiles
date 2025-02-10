@@ -87,6 +87,8 @@
           "warp"
           "signal"
           "spotify"
+          "discord"
+          "slack"
         ];
         masApps = {
           "Windows App" = 1295203466;

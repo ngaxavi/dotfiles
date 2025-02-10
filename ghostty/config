@@ -1,8 +1,11 @@
 theme = catppuccin-mocha
-font-size = 13
+font-size = 16
+font-style-bold = bold
 window-decoration = true
 background-blur-radius = 20
 background-opacity = 0.9
 background-blur-radius = 20
 font-family = "JetBrainsMono Nerd Font"
 copy-on-select = clipboard
+confirm-close-surface = false
+term = xterm-256color

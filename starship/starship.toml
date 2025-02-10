@@ -1,4 +1,4 @@
-# Get editor completions based on the config schema
+    # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Inserts a blank line between shell prompts
@@ -9,8 +9,11 @@ palette = "catppuccin_mocha"
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
-error_symbol = "[➜](bold red)" # The "error_symbol" segment is being set to "➜" with the color "bold red"
+symbol = "➜"
+success_symbol = '[ ➜](bold green) '
+error_symbol = '[ ✗](#E84D44) '
+#success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+#error_symbol = "[➜](bold red)" # The "error_symbol" segment is being set to "➜" with the color "bold red"
 
 [directory]
 truncation_length = 4
@@ -28,6 +31,12 @@ format = '[$symbol$context( \($namespace\))]($style) '
 
 [gcloud]
 disabled = true
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
 
 # palette tables should be last in the config ⚓️
 [palettes.catppuccin_macchiato]
