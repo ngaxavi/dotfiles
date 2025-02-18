@@ -1,5 +1,7 @@
 # ~/.config/fish/config.fish
 
+set -xg STARSHIP_CONFIG $HOME/.config/starship/starship.toml
+
 starship init fish | source
 
 
@@ -10,6 +12,11 @@ set -xg THEME_DIR /usr/share/themes/Catppuccin-Mocha-Standard-Blue-Dark
 
 # NIX
 #set -x PATH $PATH /run/current-system/sw/bin
+
+# Sops -Age
+set -gx SOPS_AGE_KEY_FILE $HOME/.age/key.txt
+set -gx SOPS_AGE_RECIPINETS age1u268tsyrtxg7n3lh5dhjku266krd5hzy3v2ex59w04vscpuandeqj0kd8f
+
 
 #NPM
 set -x PATH $PATH $HOME/.npm-global/bin
@@ -76,16 +83,6 @@ alias krm 'kubectl delete'
 alias krmpo 'kubectl delete pods'
 alias kap 'kubectl apply -f'
 alias kdel 'kubectl delete'
-
-# System Abbreviations
-abbr orphans "sudo pacman -Rns (pacman -Qtdq) $argv"
-abbr p "sudo pacman"
-abbr pacins "sudo pacman -S"
-abbr pacup "sudo pacman -Syu"
-abbr aurup "yay -Syua"
-abbr ss "sudo systemctl"
-abbr sdn "sudo shutdown -h now"
-abbr lsp "sudo pacman -Qett --color=always | less"
 
 # The rest of my fun git abbres
 abbr gpl "git pull --no-rebase"

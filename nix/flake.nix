@@ -82,7 +82,7 @@
           "docker"
           "microsoft-teams"
           "logi-options+"
-          "teamviewer"
+          "rustdesk"
           "notion"
           "warp"
           "signal"
