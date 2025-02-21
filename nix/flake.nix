@@ -69,6 +69,7 @@
           "npm"
           "curlie"
           "xh"
+          "pinentry-mac"
         ];
         casks = [
           "ghostty"
@@ -83,6 +84,7 @@
           "microsoft-teams"
           "logi-options+"
           "rustdesk"
+          "obsidian"
           "notion"
           "warp"
           "signal"
