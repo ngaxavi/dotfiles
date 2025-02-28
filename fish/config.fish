@@ -15,7 +15,7 @@ set -xg THEME_DIR /usr/share/themes/Catppuccin-Mocha-Standard-Blue-Dark
 
 # Sops -Age
 set -gx SOPS_AGE_KEY_FILE $HOME/.age/key.txt
-set -gx SOPS_AGE_RECIPINETS age1u268tsyrtxg7n3lh5dhjku266krd5hzy3v2ex59w04vscpuandeqj0kd8f
+set -gx SOPS_AGE_RECIPIENTS age1u268tsyrtxg7n3lh5dhjku266krd5hzy3v2ex59w04vscpuandeqj0kd8f
 
 
 #NPM

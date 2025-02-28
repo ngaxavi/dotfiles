@@ -58,6 +58,10 @@
 
       homebrew = {
         enable = true;
+        taps = [
+          "dashlane/tap"
+          "goreleaser/tap"
+        ];
         brews = [
           "stow"
           "ykman"
@@ -70,6 +74,9 @@
           "curlie"
           "xh"
           "pinentry-mac"
+          "cloudflared"
+          "dashlane-cli"
+          "goreleaser"
         ];
         casks = [
           "ghostty"
@@ -91,6 +98,7 @@
           "spotify"
           "discord"
           "slack"
+          "rectangle"
         ];
         masApps = {
           "Windows App" = 1295203466;
