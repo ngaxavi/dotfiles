@@ -54,7 +54,7 @@
           pkgs.terraform
         ];
 
-      services.nix-daemon.enable = true; 
+      nix.enable = false; 
 
       homebrew = {
         enable = true;
