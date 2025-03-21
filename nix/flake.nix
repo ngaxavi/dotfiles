@@ -5,7 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -50,8 +51,8 @@
           pkgs.bat
           pkgs.fzf
           pkgs.eza
-          pkgs.thefuck
-          pkgs.terraform
+          # pkgs.thefuck
+          # pkgs.terraform
         ];
 
       nix.enable = false; 
@@ -77,6 +78,9 @@
           "cloudflared"
           "dashlane-cli"
           "goreleaser"
+          "thefuck"
+          "terraform"
+          "temporal"
         ];
         casks = [
           "ghostty"
