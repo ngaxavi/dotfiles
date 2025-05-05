@@ -81,6 +81,8 @@
           "thefuck"
           "terraform"
           "temporal"
+          "k9s"
+          "lazygit"
         ];
         casks = [
           "ghostty"
@@ -103,6 +105,8 @@
           "discord"
           "slack"
           "rectangle"
+          "balenaetcher"
+          "tableplus"
         ];
         masApps = {
           "Windows App" = 1295203466;
