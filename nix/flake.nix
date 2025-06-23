@@ -107,6 +107,7 @@
           "rectangle"
           "balenaetcher"
           "tableplus"
+          "microsoft-azure-storage-explorer"
         ];
         masApps = {
           "Windows App" = 1295203466;
