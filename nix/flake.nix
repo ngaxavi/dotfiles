@@ -93,7 +93,7 @@
           "stats"
           "visual-studio-code"
           "jetbrains-toolbox"
-          "docker"
+          "docker-desktop"
           "microsoft-teams"
           "logi-options+"
           "rustdesk"
