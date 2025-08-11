@@ -96,7 +96,6 @@
           "docker-desktop"
           "microsoft-teams"
           "logi-options+"
-          "rustdesk"
           "obsidian"
           "notion"
           "warp"
