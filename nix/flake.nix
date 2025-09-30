@@ -30,9 +30,9 @@
           pkgs.kubectx
           pkgs.kubectl
           pkgs.magic-wormhole
-          pkgs.jdk21_headless
           pkgs.jdk17_headless
-          pkgs.jdk23_headless
+          pkgs.jdk21_headless
+          pkgs.jdk25_headless
           pkgs.jdk
           pkgs.sops
           pkgs.protobuf
@@ -137,7 +137,7 @@
       system.activationScripts.extraActivation.text = ''
         ln -sf "${pkgs.jdk17_headless}/zulu-17.jdk" "/Library/Java/JavaVirtualMachines/"
         ln -sf "${pkgs.jdk21_headless}/zulu-21.jdk" "/Library/Java/JavaVirtualMachines/"
-        ln -sf "${pkgs.jdk23_headless}/zulu-23.jdk" "/Library/Java/JavaVirtualMachines/"
+        ln -sf "${pkgs.jdk23_headless}/zulu-25.jdk" "/Library/Java/JavaVirtualMachines/"
       '';
 
       # Necessary for using flakes on this system.
