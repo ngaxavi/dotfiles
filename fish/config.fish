@@ -36,13 +36,13 @@ fzf --fish | source
 set -gx GPG_TTY (tty)
 
 # ll comand
-if type -q exa
-  alias ll "exa -lah -g --icons"
+if type -q eza
+  alias ll "eza -lah -g --icons"
   alias lla "ll -a"
 end
 
-alias ls "exa"
-alias tree "exa --tree"
+alias ls "eza"
+alias tree "eza --tree"
 alias cat "bat"
 # Go Path
 set -x PATH $PATH $HOME/go/bin
