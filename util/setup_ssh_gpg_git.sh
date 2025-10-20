@@ -16,9 +16,12 @@ echo ""
 echo "📦 Creating SSH key with passphrase..."
 
 read -p "➡️  Your email for SSH key: " SSH_EMAIL
+read -p "📁 Enter desired SSH key name (default: id_ed25519): " SSH_KEY_NAME
+SSH_KEY_NAME=${SSH_KEY_NAME:-id_ed25519}
+SSH_KEY_PATH="$HOME/.ssh/$SSH_KEY_NAME"
 read -s -p "🔑 Enter SSH key passphrase (leave blank for none): " SSH_PASSPHRASE
 echo ""
-SSH_KEY_PATH="$HOME/.ssh/id_ed25519"
+
 
 if [ -f "$SSH_KEY_PATH" ]; then
   echo "⚠️  SSH key already exists at $SSH_KEY_PATH"
