@@ -47,9 +47,9 @@ read -s -p "🔑 Enter GPG passphrase (leave blank for none): " GPG_PASSPHRASE
 echo ""
 
 cat > genkey.txt <<EOF
-Key-Type: default
+Key-Type: RSA
 Key-Length: 4096
-Subkey-Type: default
+Subkey-Type: RSA
 Name-Real: $GPG_NAME
 Name-Email: $GPG_EMAIL
 Expire-Date: 0
