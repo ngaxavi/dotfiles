@@ -5,8 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
-    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -132,6 +132,8 @@
         finder.AppleShowAllExtensions = true;
         finder.FXPreferredViewStyle = "clmv";
       };
+
+      system.primaryUser = "ngaxavi";
 
       # https://samasaur1.github.io/blog/jdks-on-nix-darwin
       system.activationScripts.extraActivation.text = ''
