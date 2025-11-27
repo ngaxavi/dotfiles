@@ -86,6 +86,7 @@
           "ghostty"
           "yubico-yubikey-manager"
           "appcleaner"
+          "google-chrome"
           "brave-browser"
           "font-jetbrains-mono-nerd-font"
           "stats"
