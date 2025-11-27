@@ -70,8 +70,6 @@
           "gnupg"
           "openssl@3"
           "nvm"
-          "pnpm"
-          "npm"
           "curlie"
           "xh"
           "pinentry-mac"
