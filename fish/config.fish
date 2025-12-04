@@ -31,6 +31,9 @@ thefuck --alias | source
 # Set up fzf key bindings
 fzf --fish | source
 
+# Claude
+set -x PATH $PATH $HOME/.local/bin
+
 
 # GPG
 set -gx GPG_TTY (tty)
