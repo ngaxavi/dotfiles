@@ -5,17 +5,13 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
-    init = function()
-      local builtin = require('telescope.builtin')
-      local wk = require('which-key')
-      wk.register({
-        ['ff'] = { builtin.find_files, "Find File" },
-        ['fb'] = { builtin.buffers, "Find Buffer" },
-        ['fg'] = { builtin.live_grep, "Find with Grep" },
-        ['fh'] = { builtin.help_tags, "Find Help" },
-        ['fn'] = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser" },
-      }, { prefix = "<leader>" })
-    end,
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffer" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find with Grep" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
+      { "<leader>fn", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File Browser" },
+    },
     opts = function()
       return {
         defaults = {
@@ -80,12 +76,10 @@ return {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
-    config = function(_, opts)
-      local wk = require('which-key')
-      wk.setup(opts)
-      wk.register({
-        ['f'] = { name = "Find" },
-      }, { prefix = "<leader>" })
-    end,
+    opts = {
+      spec = {
+        { "<leader>f", group = "Find" },
+      },
+    },
   },
 }

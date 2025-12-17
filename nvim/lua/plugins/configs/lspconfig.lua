@@ -1,6 +1,8 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.lua_ls.setup({
+-- Configure lua_ls
+vim.lsp.config.lua_ls = {
+    cmd = { "lua-language-server" },
+    root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+    filetypes = { "lua" },
     settings = {
         Lua = {
             diagnostics = {
@@ -9,14 +11,28 @@ lspconfig.lua_ls.setup({
             },
         },
     },
-})
+}
 
-lspconfig.rust_analyzer.setup({
-    cargo = {
-        features = { "all" },
+-- Configure rust_analyzer
+vim.lsp.config.rust_analyzer = {
+    cmd = { "rust-analyzer" },
+    root_markers = { "Cargo.toml", "rust-project.json" },
+    filetypes = { "rust" },
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = {
+                features = "all",
+            },
+        },
     },
-})
+}
 
-lspconfig.gopls.setup({
+-- Configure gopls
+vim.lsp.config.gopls = {
+    cmd = { "gopls" },
+    root_markers = { "go.work", "go.mod", ".git" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
-})
+}
+
+-- Enable the LSP servers
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "gopls" })
