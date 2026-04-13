@@ -81,6 +81,9 @@
           "temporal"
           "k9s"
           "lazygit"
+          "yt-dlp"
+          "ffmpeg"
+        
         ];
         casks = [
           "ghostty"
@@ -106,6 +109,7 @@
           "balenaetcher"
           "tableplus"
           "microsoft-azure-storage-explorer"
+          "vlc"
         ];
         masApps = {
           "Windows App" = 1295203466;
